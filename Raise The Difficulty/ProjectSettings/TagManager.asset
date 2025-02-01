@@ -8,12 +8,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Terrain
   - Water
   - UI
   - 
   - 
-  - 
+  - Player
   - 
   - 
   - 
@@ -40,4 +40,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Grass Floor
+    uniqueID: 702173091
+    locked: 0
+  - name: Hard Floor
+    uniqueID: 569319213
+    locked: 0
+  - name: Walls
+    uniqueID: 1188306123
+    locked: 0
+  - name: Props
+    uniqueID: 2867208901
+    locked: 0
+  - name: Enemies
+    uniqueID: 270288801
+    locked: 0
+  - name: Player
+    uniqueID: 888429893
     locked: 0
