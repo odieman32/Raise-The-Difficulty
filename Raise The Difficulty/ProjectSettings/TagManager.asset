@@ -44,6 +44,9 @@ TagManager:
   - name: Grass Floor
     uniqueID: 702173091
     locked: 0
+  - name: Lake
+    uniqueID: 1741089519
+    locked: 0
   - name: Hard Floor
     uniqueID: 569319213
     locked: 0
