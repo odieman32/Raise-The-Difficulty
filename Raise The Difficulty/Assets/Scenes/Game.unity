@@ -13667,6 +13667,7 @@ GameObject:
   - component: {fileID: 1604882237}
   - component: {fileID: 1604882236}
   - component: {fileID: 1604882238}
+  - component: {fileID: 1604882239}
   m_Layer: 0
   m_Name: Player Cam
   m_TagString: MainCamera
@@ -13745,6 +13746,18 @@ MonoBehaviour:
   m_Damping: 0.5
   m_MaxWindowSize: -1
   m_Padding: 0
+--- !u!114 &1604882239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604882235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8a05de0ac134f4f9d01bef6b9da077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1752445322
 GameObject:
   m_ObjectHideFlags: 0
@@ -48591,8 +48604,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 888429893
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: -2562138444706443875, guid: 368ecf942892d014fb47d70072cf8ad7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
