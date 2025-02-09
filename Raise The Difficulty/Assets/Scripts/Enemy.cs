@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public float health = 1;
+    public float health;
 
     private void Start() {
         animator = GetComponent<Animator>();
@@ -33,3 +33,5 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 }
+
+//Chris' Tutorials https://www.youtube.com/watch?v=7iYWpzL9GkM
