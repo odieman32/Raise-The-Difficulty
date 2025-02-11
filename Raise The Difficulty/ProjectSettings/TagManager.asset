@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - WaveSpawner
   layers:
   - Default
   - TransparentFX
@@ -62,4 +63,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 888429893
+    locked: 0
+  - name: Door
+    uniqueID: 2227494435
     locked: 0

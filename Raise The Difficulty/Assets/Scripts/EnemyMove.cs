@@ -7,6 +7,7 @@ public class EnemyMove : MonoBehaviour
 
     Transform player;
     public float moveSpeed;
+    public Enemy enemy;
 
     // Start is called before the first frame update
     void Start()
@@ -14,11 +15,9 @@ public class EnemyMove : MonoBehaviour
         player = FindAnyObjectByType<PlayerController>().transform;
     }
 
-    // Update is called once per frame
-    void Update()
+   private void EnemyMoving()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed* Time.deltaTime); //Constantly move towards player
-
+        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime); //Constantly move towards player
     }
 }
 

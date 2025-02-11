@@ -4,32 +4,87 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    Animator animator;
+    #region EnemyMove
+    private Rigidbody2D rb;
+    private PlayerController playerController;
+    public float moveSpeed;
+    private Vector3 directionToPlayer;
+    private Vector3 localscale;
+    #endregion
 
-    public float Health {
-        set {
+    #region EnemyHealth
+    public float health;
+    Animator animator;
+    #endregion
+
+    public float Health 
+    {
+        set 
+        {
             health = value;
 
-            if(health <= 0) {
+            if(health <= 0) 
+            {
                 Defeated();
             }
         }
-        get {
+        get 
+        {
             return health;
         }
     }
 
-    public float health;
+    
 
-    private void Start() {
+    private void Start() 
+    {
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        playerController = FindAnyObjectByType(typeof(PlayerController)) as PlayerController;
+        localscale = transform.localScale;
     }
 
-    public void Defeated(){
+
+    private void FixedUpdate()
+    {
+        MoveEnemy();
+    }
+
+    private void LateUpdate()
+    {
+        if (rb.velocity.x > 0)
+        {
+           transform.localScale = new Vector3(localscale.x, localscale.y, localscale.z);
+        }
+        else if (rb.velocity.x < 0)
+        {
+            transform.localScale = new Vector3(-localscale.x, localscale.y, localscale.z);
+        }
+    }
+
+    private void MoveEnemy()
+    {
+        directionToPlayer = (playerController.transform.position - transform.position).normalized;
+        rb.velocity = new Vector2 (directionToPlayer.x, directionToPlayer.y) * moveSpeed;
+    }
+
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            animator.SetTrigger("Hit");
+        }
+    }
+
+    public void Defeated()
+    {
         animator.SetTrigger("Defeated");
     }
 
-    public void RemoveEnemy() {
+    public void RemoveEnemy() 
+    {
         Destroy(gameObject);
     }
 }
