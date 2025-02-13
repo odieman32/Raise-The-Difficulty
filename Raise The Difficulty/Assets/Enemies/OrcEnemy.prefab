@@ -14,9 +14,8 @@ GameObject:
   - component: {fileID: 20673551922815643}
   - component: {fileID: 8252517047815966437}
   - component: {fileID: 5367242057876503512}
-  - component: {fileID: 605406293539931059}
   m_Layer: 7
-  m_Name: Orc
+  m_Name: OrcEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,19 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.5
-  health: 5
---- !u!114 &605406293539931059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5032134528341062087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10748aa2d1e0ec84886a4863943809a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  health: 2
 --- !u!1 &9093709454973268404
 GameObject:
   m_ObjectHideFlags: 0

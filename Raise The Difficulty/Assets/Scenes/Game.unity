@@ -387,7 +387,7 @@ Transform:
   m_GameObject: {fileID: 630959643}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.05, y: -9.51, z: -0.0795953}
+  m_LocalPosition: {x: -0.05, y: -18.44, z: -0.0795953}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9987,7 +9987,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 13
-      m_TileSpriteIndex: 13
+      m_TileSpriteIndex: 16
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -10227,7 +10227,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 12
-      m_TileSpriteIndex: 12
+      m_TileSpriteIndex: 13
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -13108,16 +13108,16 @@ Tilemap:
     m_Data: {fileID: 609158927897737126, guid: 4d58bc12262e76040a130c79a34f82b5, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: -1254356694275527506, guid: 4d58bc12262e76040a130c79a34f82b5, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: -4729257109912261695, guid: 4d58bc12262e76040a130c79a34f82b5, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -2412755840708792203, guid: 4d58bc12262e76040a130c79a34f82b5, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -3207387508226480730, guid: 4d58bc12262e76040a130c79a34f82b5, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 5654757833078730701, guid: 4d58bc12262e76040a130c79a34f82b5, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -2412755840708792203, guid: 4d58bc12262e76040a130c79a34f82b5, type: 3}
   - m_RefCount: 9
     m_Data: {fileID: -7217348871357176810, guid: 4d58bc12262e76040a130c79a34f82b5, type: 3}
   - m_RefCount: 5
@@ -13434,14 +13434,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currWave: 1
-  waveValue: 6
+  waveValue: 10
   enemiesToSpawn:
   - {fileID: 5032134528341062087, guid: a3a577791457a8948b54867873b95838, type: 3}
   - {fileID: 5032134528341062087, guid: a3a577791457a8948b54867873b95838, type: 3}
   - {fileID: 5032134528341062087, guid: a3a577791457a8948b54867873b95838, type: 3}
   spawnLocation:
   - {fileID: 630959644}
-  spawnIndex: 3
+  spawnIndex: 0
   waveDuration: 60
   spawnedEnemies: []
 --- !u!4 &1312628561
@@ -13453,7 +13453,7 @@ Transform:
   m_GameObject: {fileID: 1312628559}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1, y: -10.06, z: -0.1591906}
+  m_LocalPosition: {x: -0.1, y: -18.14, z: -0.1591906}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49024,13 +49024,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5032134528341062087, guid: a3a577791457a8948b54867873b95838, type: 3}
       propertyPath: m_Name
-      value: Orc
+      value: OrcEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 5367242057876503512, guid: a3a577791457a8948b54867873b95838, type: 3}
-      propertyPath: health
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 605406293539931059, guid: a3a577791457a8948b54867873b95838, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
