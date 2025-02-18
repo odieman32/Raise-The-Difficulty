@@ -67,3 +67,6 @@ TagManager:
   - name: Door
     uniqueID: 2227494435
     locked: 0
+  - name: UI
+    uniqueID: 1729416001
+    locked: 0

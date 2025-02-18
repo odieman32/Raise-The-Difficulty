@@ -14,8 +14,10 @@ public class WaveSpawner : MonoBehaviour
 
     public int waveDuration;
     private float waveTimer;
-    private float spawnInterval;
+    [SerializeField] float spawnInterval = 2f;
     private float spawnTimer;
+
+    private bool isSpawning = false;
 
     public List<GameObject> spawnedEnemies = new List<GameObject>();
     // Start is called before the first frame update
@@ -27,14 +29,13 @@ public class WaveSpawner : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        spawnedEnemies.RemoveAll(item => item == null); //removes all items where an item is null
         if (spawnTimer <= 0)
         {
             //spawn enemy
-            if (enemiesToSpawn.Count > 0)
+            if (isSpawning)
             {
-                GameObject enemy = (GameObject)Instantiate(enemiesToSpawn[0], spawnLocation[spawnIndex].position, Quaternion.identity); // spawn first enemy in our list
-                enemiesToSpawn.RemoveAt(0); // and remove it
-                spawnedEnemies.Add(enemy);
+                StartCoroutine(DelaySpawn(waveValue)); // spawn first enemy in our list
                 spawnTimer = spawnInterval;
 
                 if (spawnIndex + 1 <= spawnLocation.Length - 1)
@@ -54,22 +55,21 @@ public class WaveSpawner : MonoBehaviour
         else
         {
             spawnTimer -= Time.fixedDeltaTime;
-            spawnTimer -= Time.fixedDeltaTime;
         }
 
         if (waveTimer <= 0 && spawnedEnemies.Count <= 0)
         {
             currWave++;
             GenerateWave();
+            waveTimer -= Time.fixedDeltaTime;
         }
     }
 
     public void GenerateWave()
     {
-        waveValue = currWave * 10;
+        waveValue = currWave * 2; //adds to the 
         GenerateEnemies();
-
-        spawnInterval = waveDuration / enemiesToSpawn.Count; // gives a fixed time between each enemies
+        spawnInterval = 2f; // gives a fixed time between each enemies
         waveTimer = waveDuration; // wave duration is read only
     }
 
@@ -77,7 +77,7 @@ public class WaveSpawner : MonoBehaviour
     {
         //Create Temporary list of enemies
         //in a loop grab a random enemy
-        // see if we can afford it
+        //see if we can afford it
         //if we can, add it to list and deduct cost
         //repeat
         //if no points leave loop
@@ -100,9 +100,26 @@ public class WaveSpawner : MonoBehaviour
         }
         enemiesToSpawn.Clear();
         enemiesToSpawn = generatedEnemies;
+        isSpawning = true;
+    }
+
+    private IEnumerator DelaySpawn (int enemyValue)
+    {
+        isSpawning = false;
+
+        int spawnCount = 0;
+        while (enemiesToSpawn.Count > 0)
+        {
+            yield return new WaitForSeconds(spawnInterval);
+            spawnCount++;
+            GameObject enemy = (GameObject)Instantiate(enemiesToSpawn[0], spawnLocation[spawnIndex].position, Quaternion.identity);
+            spawnedEnemies.Add(enemy);
+            enemiesToSpawn.RemoveAt(0);
+        }
+
     }
 }
-
+[System.Serializable]
 public class EnemySpawn
 {
     public GameObject enemyPrefab;
