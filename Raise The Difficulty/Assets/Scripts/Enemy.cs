@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     Animator animator;
     #endregion
 
+    private PlayerHit hit;
     public float Health 
     {
         set 
@@ -42,6 +43,12 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerController = FindAnyObjectByType(typeof(PlayerController)) as PlayerController;
         localscale = transform.localScale;
+        hit = FindAnyObjectByType(typeof (PlayerHit)) as PlayerHit;
+    }
+
+    void Awake()
+    {
+       
     }
 
 
@@ -72,9 +79,14 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "Sword")
         {
             animator.SetTrigger("Hit");
+        }
+
+        if (collision.tag == "Hitbox")
+        {
+            hit.RegisterHit();
         }
     }
 

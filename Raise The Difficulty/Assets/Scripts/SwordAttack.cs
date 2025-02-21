@@ -7,7 +7,7 @@ public class SwordAttack : MonoBehaviour
     public Collider2D swordCollider;
     public float damage;
     Vector2 rightAttackOffset;
-
+    
     private void Start() 
     {
         rightAttackOffset = transform.position;
@@ -30,9 +30,9 @@ public class SwordAttack : MonoBehaviour
         swordCollider.enabled = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) 
+    void OnTriggerEnter2D(Collider2D collision) 
     {
-        if(collision.tag == "Enemy") 
+        if (collision.tag == "Enemy") 
         {
             // Deal damage to the enemy
             Enemy enemy = collision.GetComponent<Enemy>();
