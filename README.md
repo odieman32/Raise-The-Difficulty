@@ -5,3 +5,6 @@ Each difficulty has criteria you must meet in order to go up in difficulty.
 This could consist of number if hits on the plyer, timing or accuracy. 
 Each level you will be able to upgrade a stat on your character.
 Good luck and have fun!
+
+[Game Design Document.docx](https://github.com/user-attachments/files/18917411/Game.Design.Document.docx)
+
