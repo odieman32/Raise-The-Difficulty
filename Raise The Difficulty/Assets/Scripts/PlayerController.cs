@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,6 +19,12 @@ public class PlayerController : MonoBehaviour
     List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
 
     bool canMove = true;
+    //private bool canDash = true;
+    //private bool isDashing;
+    //private float dashingPower = 16f;
+   // private float dashingTime = 0.2f;
+    //private float dashingCooldown = 1f;
+    //[SerializeField] private TrailRenderer tr;
 
     // Start is called before the first frame update
     void Start()
@@ -27,9 +34,31 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    private void Update()
+    {
+        //if (isDashing)
+        //{
+           //return;
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        //{
+          //  StartCoroutine(Dash());
+        //}
+        //else if (Input.GetKeyUp(KeyCode.LeftShift))
+        //{
+          //  StopCoroutine(Dash());
+        //}
+    }
+
     private void FixedUpdate() 
     {
-        if(canMove) 
+        //if (isDashing)
+        //{
+          //  return;
+        //}
+
+       if(canMove) 
         {
             // If movement input is not 0, try to move
             if(movementInput != Vector2.zero){
@@ -128,4 +157,20 @@ public class PlayerController : MonoBehaviour
     {
         canMove = true;
     }
+
+    //private IEnumerator Dash()
+    //{
+        //canDash = false;
+        //isDashing = true;
+        //float originalGravity = rb.gravityScale;
+        //rb.gravityScale = 0f;
+        //rb.velocity = new Vector2(movementInput.x * dashingPower, movementInput.y * dashingPower);
+        //tr.emitting = true;
+        //yield return new WaitForSeconds(dashingTime);
+        //tr.emitting = false;
+        //rb.gravityScale = originalGravity;
+        //isDashing = false;
+        //yield return new WaitForSeconds(dashingCooldown);
+        //canDash = true;
+    //}
 }
