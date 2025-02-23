@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     #region EnemyHealth
     public float health;
     Animator animator;
+    Collider2D Collider2D;
     #endregion
 
     private PlayerHit hit;
@@ -44,6 +45,7 @@ public class Enemy : MonoBehaviour
         playerController = FindAnyObjectByType(typeof(PlayerController)) as PlayerController;
         localscale = transform.localScale;
         hit = FindAnyObjectByType(typeof (PlayerHit)) as PlayerHit;
+        Collider2D = GetComponent<Collider2D>();
     }
 
     void Awake()
@@ -93,6 +95,7 @@ public class Enemy : MonoBehaviour
     public void Defeated()
     {
         animator.SetTrigger("Defeated");
+        Collider2D.enabled = false;
     }
 
     public void RemoveEnemy() 

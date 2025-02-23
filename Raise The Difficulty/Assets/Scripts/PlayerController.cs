@@ -7,24 +7,31 @@ using UnityEngine.InputSystem;
 // Takes and handles input and movement for a player character
 public class PlayerController : MonoBehaviour
 {
+    #region Public
     public float moveSpeed = 1f;
     public float collisionOffset = 0.05f;
     public ContactFilter2D movementFilter;
     public SwordAttack swordAttack;
+    #endregion
 
+    #region References
     Vector2 movementInput;
     SpriteRenderer spriteRenderer;
     Rigidbody2D rb;
     Animator animator;
     List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
+    #endregion
 
+    #region Dash
     bool canMove = true;
-    //private bool canDash = true;
-    //private bool isDashing;
-    //private float dashingPower = 16f;
-   // private float dashingTime = 0.2f;
-    //private float dashingCooldown = 1f;
-    //[SerializeField] private TrailRenderer tr;
+    private bool canDash = true;
+    private bool isDashing;
+    private float dashingPower = 16f;
+    private float dashingTime = 0.2f;
+    private float dashingCooldown = 1f;
+    [SerializeField] private TrailRenderer tr;
+    #endregion
+
 
     // Start is called before the first frame update
     void Start()
@@ -36,27 +43,27 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        //if (isDashing)
-        //{
-           //return;
-        //}
+        if (isDashing)
+        {
+           return;
+        }
 
-        //if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
-        //{
-          //  StartCoroutine(Dash());
-        //}
-        //else if (Input.GetKeyUp(KeyCode.LeftShift))
-        //{
-          //  StopCoroutine(Dash());
-        //}
+        if (Input.GetKeyDown(KeyCode.Space) && canDash)
+        {
+            StartCoroutine(Dash());
+        }
+        else
+        {
+            StopCoroutine(Dash());
+        }
     }
 
     private void FixedUpdate() 
     {
-        //if (isDashing)
-        //{
-          //  return;
-        //}
+        if (isDashing)
+        {
+            return;
+        }
 
        if(canMove) 
         {
@@ -158,19 +165,20 @@ public class PlayerController : MonoBehaviour
         canMove = true;
     }
 
-    //private IEnumerator Dash()
-    //{
-        //canDash = false;
-        //isDashing = true;
-        //float originalGravity = rb.gravityScale;
-        //rb.gravityScale = 0f;
-        //rb.velocity = new Vector2(movementInput.x * dashingPower, movementInput.y * dashingPower);
-        //tr.emitting = true;
-        //yield return new WaitForSeconds(dashingTime);
-        //tr.emitting = false;
-        //rb.gravityScale = originalGravity;
-        //isDashing = false;
-        //yield return new WaitForSeconds(dashingCooldown);
-        //canDash = true;
-    //}
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        rb.velocity = new Vector2(movementInput.x * dashingPower, movementInput.y * dashingPower);
+        tr.emitting = true;
+        yield return new WaitForSeconds(dashingTime);
+        rb.velocity = new Vector2(movementInput.x = 0, movementInput.y = 0);
+        tr.emitting = false;
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+    }
 }
