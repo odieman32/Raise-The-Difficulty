@@ -8,6 +8,7 @@ public class PlayerHit : MonoBehaviour
     Animator animator;
     private int hitCount = 0;
     public Text hitCountText;
+    public PerformanceWaves waves;
 
     private void Start()
     {
@@ -25,6 +26,15 @@ public class PlayerHit : MonoBehaviour
         hitCount++;
         Debug.Log("Player Hit!" + hitCount);
 
+        if (hitCountText != null)
+        {
+            hitCountText.text = "Hits: " + hitCount;
+        }
+    }
+
+    public void ResetHits()
+    {
+        hitCount = 0;
         if (hitCountText != null)
         {
             hitCountText.text = "Hits: " + hitCount;
