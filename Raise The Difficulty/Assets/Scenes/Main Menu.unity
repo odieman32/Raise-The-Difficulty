@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 294181110}
   - component: {fileID: 294181109}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Game Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -451,7 +451,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
     m_FontSize: 25
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 60
     m_Alignment: 4
@@ -35837,7 +35837,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.109000005, y: 0.08356641}
   m_AnchorMax: {x: 0.89100003, y: 0.91700006}
-  m_AnchoredPosition: {x: 515.3397, y: 9.46109}
+  m_AnchoredPosition: {x: 515.3397, y: 9.461121}
   m_SizeDelta: {x: -1403.5715, y: -678.8651}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &991119191
@@ -36792,7 +36792,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.109000005, y: 0.08356641}
   m_AnchorMax: {x: 0.89100003, y: 0.91700006}
-  m_AnchoredPosition: {x: 515.3397, y: 9.46109}
+  m_AnchoredPosition: {x: 515.3397, y: 9.461121}
   m_SizeDelta: {x: -1403.5715, y: -678.8651}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1512897396
