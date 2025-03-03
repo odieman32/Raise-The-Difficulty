@@ -28,6 +28,7 @@ public class PerformanceWaves : MonoBehaviour
 
     private void Start()
     {
+        InitializeWaves();
         StartWave();
     }
 
@@ -51,20 +52,30 @@ public class PerformanceWaves : MonoBehaviour
         }
     }
 
+    private void InitializeWaves()
+    {
+        waves.Add(new Wave { waveIndex = 0, wavePoints = 1, waveDuration = 30, maxHitsAllowed = 5 });
+        waves.Add(new Wave { waveIndex = 1, wavePoints = 2, waveDuration = 40, maxHitsAllowed = 4 });
+        waves.Add(new Wave { waveIndex = 2, wavePoints = 3, waveDuration = 50, maxHitsAllowed = 3 });
+    }
+
     private void StartWave()
     {
         if (currentWaveIndex < waves.Count)
         {
+            Debug.Log($"Starting Wave {currentWaveIndex + 1}");
             isSpawning = true;
             playerHit.ResetHits();
             GenerateEnemies(waves[currentWaveIndex].wavePoints);
 
             if (enemiesToSpawn.Count == 0)
             {
-                Debug.LogError("Wave Failed");
-                StartWave();
+                Debug.LogError($"Wave {currentWaveIndex + 1} Failed - No enemies generated!");
                 return;
             }
+
+            Debug.Log($"Wave {currentWaveIndex + 1}: Spawning {enemiesToSpawn.Count} enemies.");
+
         }
         else
         {
@@ -77,6 +88,8 @@ public class PerformanceWaves : MonoBehaviour
         List<GameObject> generatedEnemies = new List<GameObject>();
 
         int remainingPoints = wavePoints;
+
+        Debug.Log($"Generating Wave {currentWaveIndex + 1}: {wavePoints} points available.");
 
         while (remainingPoints > 0)
         {
@@ -93,16 +106,23 @@ public class PerformanceWaves : MonoBehaviour
 
             if (selectedEnemy == null)
             {
+                Debug.LogWarning($"Wave {currentWaveIndex + 1}: No enemy found for remaining points ({remainingPoints}).");
                 break;
             }
 
             generatedEnemies.Add(selectedEnemy.enemyPrefab);
             remainingPoints -= selectedEnemy.cost;
+
+            Debug.Log($"Wave {currentWaveIndex + 1}: Spawned {selectedEnemy.enemyPrefab.name} (Cost: {selectedEnemy.cost}, Remaining Points: {remainingPoints})");
+        }
+
+        if (generatedEnemies.Count == 0)
+        {
+            Debug.LogError($"Wave {currentWaveIndex + 1} failed! No enemies generated.");
         }
 
         enemiesToSpawn = generatedEnemies;
         isSpawning = true;
-
     }
 
     private IEnumerator DelaySpawn()
@@ -125,6 +145,11 @@ public class PerformanceWaves : MonoBehaviour
 
     private void CheckWaveProgress()
     {
+        if (spawnedEnemies.Count > 0)
+        {
+            Debug.Log("Enemies still exist! Waiting for them to be destroyed.");
+            return; // Do NOT progress until all enemies are gone
+        }
         if (playerHit.HitCount < waves[currentWaveIndex].maxHitsAllowed)
         {
             if (currentWaveIndex < waves.Count - 1)
@@ -141,7 +166,15 @@ public class PerformanceWaves : MonoBehaviour
         else
         {
             Debug.Log("Too many hits! Restarting Wave" + (currentWaveIndex + 1));
-            StartWave();
+            RestartCurrentWave();
         }
     }
+
+    private void RestartCurrentWave()
+    {
+        Debug.Log($"Restarting Wave {currentWaveIndex + 1}");
+        StartWave();
+    }
 }
+
+
