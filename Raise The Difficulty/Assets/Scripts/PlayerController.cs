@@ -32,6 +32,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private TrailRenderer tr;
     #endregion
 
+    #region
+    [SerializeField] AudioClip attackSound;
+    [SerializeField] AudioClip dashSound;
+    private AudioSource audioSource;
+    #endregion
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +46,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         Cursor.lockState = CursorLockMode.Locked;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -52,6 +59,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && canDash)
         {
             StartCoroutine(Dash());
+            GetComponent<AudioSource>().PlayOneShot(dashSound);
         }
         else
         {
@@ -134,6 +142,7 @@ public class PlayerController : MonoBehaviour
     void OnFire() 
     {
         animator.SetTrigger("swordAttack");
+        GetComponent<AudioSource>().PlayOneShot(attackSound);
     }
 
     public void SwordAttack() 

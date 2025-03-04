@@ -18,6 +18,11 @@ public class Enemy : MonoBehaviour
     Collider2D Collider2D;
     #endregion
 
+    #region
+    [SerializeField] AudioClip hitSound;
+    private AudioSource audioSource;
+    #endregion
+
     private PlayerHit hit;
     public float Health 
     {
@@ -46,13 +51,8 @@ public class Enemy : MonoBehaviour
         localscale = transform.localScale;
         hit = FindAnyObjectByType(typeof (PlayerHit)) as PlayerHit;
         Collider2D = GetComponent<Collider2D>();
+        audioSource = GetComponent<AudioSource>();
     }
-
-    void Awake()
-    {
-       
-    }
-
 
     private void FixedUpdate()
     {
@@ -84,6 +84,7 @@ public class Enemy : MonoBehaviour
         if (collision.tag == "Sword")
         {
             animator.SetTrigger("Hit");
+            GetComponent<AudioSource>().PlayOneShot(hitSound);
         }
 
         if (collision.tag == "Hitbox")
