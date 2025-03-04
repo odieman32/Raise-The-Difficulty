@@ -9,7 +9,6 @@ public class PerformanceWaves : MonoBehaviour
     {
         public int waveIndex;
         public int wavePoints;
-        public int waveDuration;
         public int maxHitsAllowed;
     }
 
@@ -25,6 +24,9 @@ public class PerformanceWaves : MonoBehaviour
 
     public PlayerHit playerHit;
     public List<GameObject> spawnedEnemies = new List<GameObject>();
+
+    private bool gameOver = false;
+    private bool checkingProgress = false;
 
     private void Start()
     {
@@ -46,7 +48,7 @@ public class PerformanceWaves : MonoBehaviour
             spawnTimer -= Time.fixedDeltaTime;
         }
 
-        if (spawnedEnemies.Count == 0 && !isSpawning && enemiesToSpawn.Count == 0)
+        if (!checkingProgress && spawnedEnemies.Count == 0 && !isSpawning && enemiesToSpawn.Count == 0)
         {
             StartCoroutine(WaitAndCheckWaveProgress());
         }
@@ -54,33 +56,40 @@ public class PerformanceWaves : MonoBehaviour
 
     private void InitializeWaves()
     {
-        waves.Add(new Wave { waveIndex = 0, wavePoints = 1, waveDuration = 30, maxHitsAllowed = 5 });
-        waves.Add(new Wave { waveIndex = 1, wavePoints = 2, waveDuration = 40, maxHitsAllowed = 4 });
-        waves.Add(new Wave { waveIndex = 2, wavePoints = 3, waveDuration = 50, maxHitsAllowed = 3 });
+        waves.Clear();
+        waves.Add(new Wave { waveIndex = 0, wavePoints = 1, maxHitsAllowed = 5 });
+        waves.Add(new Wave { waveIndex = 1, wavePoints = 2, maxHitsAllowed = 4 });
+        waves.Add(new Wave { waveIndex = 2, wavePoints = 3, maxHitsAllowed = 3 });
     }
 
     private void StartWave()
     {
-        if (currentWaveIndex < waves.Count)
+        if (gameOver)
         {
-            Debug.Log($"Starting Wave {currentWaveIndex + 1}");
-            isSpawning = true;
-            playerHit.ResetHits();
-            GenerateEnemies(waves[currentWaveIndex].wavePoints);
-
-            if (enemiesToSpawn.Count == 0)
-            {
-                Debug.LogError($"Wave {currentWaveIndex + 1} Failed - No enemies generated!");
-                return;
-            }
-
-            Debug.Log($"Wave {currentWaveIndex + 1}: Spawning {enemiesToSpawn.Count} enemies.");
-
+            Debug.Log("Game is Over");
+            return;
         }
-        else
+        if (currentWaveIndex >= waves.Count)
         {
-            Debug.Log("All waves completed");
+            Debug.Log("ALl waves complete!");
+            gameOver = true;
+            return;
         }
+        Debug.Log($"Starting Wave {currentWaveIndex}");
+        isSpawning = true;
+        playerHit.ResetHits();
+        enemiesToSpawn.Clear(); // Clear previous wave enemies
+        spawnedEnemies.Clear(); // Clear any lingering enemies
+
+        GenerateEnemies(waves[currentWaveIndex].wavePoints);
+
+        if (enemiesToSpawn.Count == 0)
+        {
+            Debug.LogError($"Wave {currentWaveIndex} Failed - No enemies generated!");
+            return;
+        }
+
+        Debug.Log($"Wave {currentWaveIndex}: Spawning {enemiesToSpawn.Count} enemies.");
     }
 
     private void GenerateEnemies(int wavePoints)
@@ -89,7 +98,7 @@ public class PerformanceWaves : MonoBehaviour
 
         int remainingPoints = wavePoints;
 
-        Debug.Log($"Generating Wave {currentWaveIndex + 1}: {wavePoints} points available.");
+        Debug.Log($"Generating Wave {currentWaveIndex}: {wavePoints} points available.");
 
         while (remainingPoints > 0)
         {
@@ -134,13 +143,16 @@ public class PerformanceWaves : MonoBehaviour
             GameObject enemy = Instantiate(enemiesToSpawn[0], spawnLocation[spawnIndex].position, Quaternion.identity);
             spawnedEnemies.Add(enemy);
             enemiesToSpawn.RemoveAt(0);
+            spawnIndex = (spawnIndex + 1) % spawnLocation.Length;
         }
     }
 
     private IEnumerator WaitAndCheckWaveProgress()
     {
+        checkingProgress = true;
         yield return new WaitForSeconds(2f);
         CheckWaveProgress();
+        checkingProgress = false;
     }
 
     private void CheckWaveProgress()
@@ -155,24 +167,34 @@ public class PerformanceWaves : MonoBehaviour
             if (currentWaveIndex < waves.Count - 1)
             {
                 currentWaveIndex++;
-                Debug.Log("Wave Complete! Moving to wave " + (currentWaveIndex + 1));
+                Debug.Log("Wave Complete! Moving to wave " + (currentWaveIndex));
                 StartWave();
             }
             else
             {
                 Debug.Log("Game Over! All Waves Complete");
+                gameOver = true;
             }
         }
         else
         {
-            Debug.Log("Too many hits! Restarting Wave" + (currentWaveIndex + 1));
+            Debug.Log("Too many hits! Restarting Wave" + (currentWaveIndex));
             RestartCurrentWave();
         }
     }
 
     private void RestartCurrentWave()
     {
-        Debug.Log($"Restarting Wave {currentWaveIndex + 1}");
+        if (currentWaveIndex > 0)
+        {
+            currentWaveIndex--;
+            Debug.Log("Restarting Previous Wave");
+        }
+        else
+        {
+            Debug.Log("Restarting Wave");
+        }
+
         StartWave();
     }
 }

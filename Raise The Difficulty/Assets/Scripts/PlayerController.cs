@@ -11,7 +11,9 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 1f;
     public float collisionOffset = 0.05f;
     public ContactFilter2D movementFilter;
-    public SwordAttack swordAttack;
+    [SerializeField] SwordAttack swordAttack;
+    [SerializeField] PauseMenu pauseMenu;
+    [SerializeField] PlayerInput playerInput;
     #endregion
 
     #region References
@@ -32,7 +34,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private TrailRenderer tr;
     #endregion
 
-    #region
+    #region Audio
     [SerializeField] AudioClip attackSound;
     [SerializeField] AudioClip dashSound;
     private AudioSource audioSource;
@@ -64,6 +66,15 @@ public class PlayerController : MonoBehaviour
         else
         {
             StopCoroutine(Dash());
+        }
+
+        if (pauseMenu.GameIsPaused == true)
+        {
+            playerInput.enabled = false;
+        }
+        else if (pauseMenu.GameIsPaused == false)
+        {
+            playerInput.enabled = true;
         }
     }
 

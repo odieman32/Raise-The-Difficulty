@@ -51212,6 +51212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3b6aeb6917c2a4892abe60414c2803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameIsPaused: 0
   pauseMenuUI: {fileID: 1751544131}
 --- !u!114 &1936419107
 MonoBehaviour:
@@ -52167,6 +52168,8 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   swordAttack: {fileID: 1712346845}
+  pauseMenu: {fileID: 1936419106}
+  playerInput: {fileID: 5272552500100688338}
   tr: {fileID: 5272552500100688340}
   attackSound: {fileID: 8300000, guid: 88b1cbe3caa3fee4b8b103b5edd7aba9, type: 3}
   dashSound: {fileID: 8300000, guid: f11db4559b3ffff45b62e9327fc5535d, type: 3}
