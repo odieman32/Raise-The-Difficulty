@@ -12,22 +12,34 @@ public class PerformanceWaves : MonoBehaviour
         public int maxHitsAllowed;
     }
 
+    #region Lists
     public List<Wave> waves = new List<Wave>();
     public int currentWaveIndex = 0;
     public List<EnemySpawn> enemies = new List<EnemySpawn>();
     public List<GameObject> enemiesToSpawn = new List<GameObject>();
+    #endregion
 
+    #region Spawning
     public Transform[] spawnLocation;
     private int spawnIndex = 0;
     private float spawnTimer;
     private bool isSpawning = false;
+    #endregion
 
+    #region References
     public PlayerHit playerHit;
+    public GameObject upgradePanel;
+    public PlayerController playerController;
+    private string lastUpgradeType = "";
     public List<GameObject> spawnedEnemies = new List<GameObject>();
+    #endregion
 
+    #region Bools/Times
     private bool gameOver = false;
     private bool checkingProgress = false;
-
+    private float waveStartTime = 0f;
+    private float minWaveDuration = 5f;
+    #endregion
     private void Start()
     {
         InitializeWaves();
@@ -78,6 +90,9 @@ public class PerformanceWaves : MonoBehaviour
             gameOver = true;
             return;
         }
+
+        waveStartTime = Time.time;
+
         Debug.Log($"Starting Wave {currentWaveIndex}");
         isSpawning = true;
         playerHit.ResetHits();
@@ -153,8 +168,13 @@ public class PerformanceWaves : MonoBehaviour
     private IEnumerator WaitAndCheckWaveProgress()
     {
         checkingProgress = true;
-        yield return new WaitForSeconds(2f);
-        CheckWaveProgress();
+        int checkWaveIndex = currentWaveIndex;
+        yield return new WaitUntil(() => Time.time - waveStartTime >= minWaveDuration);
+        yield return new WaitForSeconds(1f);
+        if (currentWaveIndex == checkWaveIndex)
+        {
+            CheckWaveProgress();
+        }
         checkingProgress = false;
     }
 
@@ -165,40 +185,86 @@ public class PerformanceWaves : MonoBehaviour
             Debug.Log("Enemies still exist! Waiting for them to be destroyed.");
             return; // Do NOT progress until all enemies are gone
         }
+
         if (playerHit.HitCount < waves[currentWaveIndex].maxHitsAllowed)
         {
-            if (currentWaveIndex < waves.Count - 1)
-            {
-                currentWaveIndex++;
-                Debug.Log("Wave Complete! Moving to wave " + (currentWaveIndex));
-                StartWave();
-            }
-            else
-            {
-                Debug.Log("Game Over! All Waves Complete");
-                gameOver = true;
-            }
+            ShowUpgradePanel();
         }
         else
         {
-            Debug.Log("Too many hits! Restarting Wave" + (currentWaveIndex));
-            RestartCurrentWave();
+            Debug.Log("Down Wave");
+            if (!string.IsNullOrEmpty(lastUpgradeType))
+            {
+                RevertLastUpgrade();
+                lastUpgradeType = "";
+            }
+
+            if (currentWaveIndex > 0)
+            {
+                currentWaveIndex--;
+            }
+            StartWave();
         }
     }
 
-    private void RestartCurrentWave()
+    private void ShowUpgradePanel()
     {
-        if (currentWaveIndex > 0)
+        if (upgradePanel != null)
         {
-            currentWaveIndex--;
-            Debug.Log("Restarting Previous Wave");
+            Cursor.lockState = CursorLockMode.None;
+            upgradePanel.SetActive(true);
         }
         else
         {
-            Debug.Log("Restarting Wave");
+            Debug.LogWarning("Panel not Assigned");
+            ApplyUpgrade("");
+        }
+    }
+
+    public void ApplyUpgrade(string upgradeType)
+    {
+        lastUpgradeType = upgradeType;
+        switch (upgradeType)
+        {
+            case "Attack":
+                playerController.UpgradeAttack();
+                break;
+            case "Speed":
+                playerController.UpgradeSpeed();
+                break;
+            case "StaminaRecovery":
+                playerController.UpgradeStaminaRecovery();
+                break;
+            default:
+                Debug.Log("No upgrade");
+                break;
         }
 
+        if (upgradePanel != null)
+        {
+            upgradePanel.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        currentWaveIndex++;
         StartWave();
+    }
+
+    private void RevertLastUpgrade()
+    {
+        switch (lastUpgradeType)
+        {
+            case "Attack":
+                playerController.RevertAttack();
+                break;
+            case "Speed":
+                playerController.RevertSpeed();
+                break;
+            case "StaminaRecovery":
+                playerController.RevertStaminaRecovery();
+                break;
+            default:
+                break;
+        }
     }
 }
 

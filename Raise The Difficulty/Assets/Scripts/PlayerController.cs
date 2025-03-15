@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 // Takes and handles input and movement for a player character
 public class PlayerController : MonoBehaviour
@@ -14,6 +15,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] SwordAttack swordAttack;
     [SerializeField] PauseMenu pauseMenu;
     [SerializeField] PlayerInput playerInput;
+    #endregion
+
+    #region Stamina
+    public float maxStamina = 100f;
+    public float currentStamina = 100f;
+    public float staminaRecoveryRate = 15f; // stamina recovered when not attacking or dashing
+    public float dashStaminaCost = 20f;
+    public float attackStaminaCost = 15f;
+    public Image staminaBar;
     #endregion
 
     #region References
@@ -40,6 +50,11 @@ public class PlayerController : MonoBehaviour
     private AudioSource audioSource;
     #endregion
 
+    #region Upgrade
+    public int speedUpgradeLevel = 0;
+    public int staminaRecoveryUpgradeLevel = 0;
+    public int attackUpgradeLevel = 0;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -47,8 +62,12 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        Cursor.lockState = CursorLockMode.Locked;
         audioSource = GetComponent<AudioSource>();
+
+        Cursor.lockState = CursorLockMode.Locked;
+
+        currentStamina = maxStamina;
+        UpdateStaminaUI();
     }
 
     private void Update()
@@ -60,12 +79,17 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && canDash)
         {
-            StartCoroutine(Dash());
-            GetComponent<AudioSource>().PlayOneShot(dashSound);
-        }
-        else
-        {
-            StopCoroutine(Dash());
+            if (currentStamina >= dashStaminaCost)
+            {
+                currentStamina -= dashStaminaCost;
+                UpdateStaminaUI();
+                StartCoroutine(Dash());
+                GetComponent<AudioSource>().PlayOneShot(dashSound);
+            }
+            else
+            {
+                Debug.Log("Not enough stamina");
+            }
         }
 
         if (pauseMenu.GameIsPaused == true)
@@ -76,6 +100,8 @@ public class PlayerController : MonoBehaviour
         {
             playerInput.enabled = true;
         }
+
+        RecoverStamina();
     }
 
     private void FixedUpdate() 
@@ -152,8 +178,18 @@ public class PlayerController : MonoBehaviour
 
     void OnFire() 
     {
-        animator.SetTrigger("swordAttack");
-        GetComponent<AudioSource>().PlayOneShot(attackSound);
+        if (currentStamina >= attackStaminaCost)
+        {
+            currentStamina -= attackStaminaCost;
+            UpdateStaminaUI();
+
+            animator.SetTrigger("swordAttack");
+            GetComponent<AudioSource>().PlayOneShot(attackSound);
+        }
+        else
+        {
+            Debug.Log("Not enough stamina");
+        }
     }
 
     public void SwordAttack() 
@@ -201,5 +237,63 @@ public class PlayerController : MonoBehaviour
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+    }
+
+    private void RecoverStamina()
+    {
+        if (currentStamina < maxStamina)
+        {
+            currentStamina += staminaRecoveryRate * Time.deltaTime;
+            currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
+            UpdateStaminaUI();
+        }
+    }
+
+    private void UpdateStaminaUI()
+    {
+        if (staminaBar != null)
+        {
+            staminaBar.fillAmount = currentStamina / maxStamina;
+        }
+    }
+
+    public void UpgradeAttack()
+    {
+        swordAttack.damage += 1f;
+        attackUpgradeLevel++;
+    }
+    public void UpgradeSpeed()
+    {
+        moveSpeed += .5f;
+        speedUpgradeLevel++;
+    }
+    public void UpgradeStaminaRecovery()
+    {
+        staminaRecoveryRate += 5f;
+        staminaRecoveryUpgradeLevel++;
+    }
+    public void RevertAttack()
+    {
+        if (attackUpgradeLevel > 0)
+        {
+            swordAttack.damage -= 1f;
+            attackUpgradeLevel--;
+        }
+    }
+    public void RevertSpeed()
+    {
+        if (speedUpgradeLevel > 0)
+        {
+            moveSpeed -= 0.5f;
+            speedUpgradeLevel--;
+        }
+    }
+    public void RevertStaminaRecovery()
+    {
+        if (attackUpgradeLevel > 0)
+        {
+            staminaRecoveryRate -= 5f;
+            staminaRecoveryUpgradeLevel--;
+        }
     }
 }
