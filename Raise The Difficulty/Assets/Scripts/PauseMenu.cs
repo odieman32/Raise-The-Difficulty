@@ -8,11 +8,15 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public bool GameIsPaused = false; //bool to tell if game is paused
+    public bool UpgradeActive = false; 
 
     public GameObject pauseMenuUI; //game object for UI
 
     private void Update()
     {
+        if (UpgradeActive)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Tab)) //Checks if escape is pressed
         {
             if (GameIsPaused) //if game is paused then pressing it will call the resume button

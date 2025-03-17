@@ -30,6 +30,7 @@ public class PerformanceWaves : MonoBehaviour
     public PlayerHit playerHit;
     public GameObject upgradePanel;
     public PlayerController playerController;
+    public PauseMenu pauseMenu;
     private string lastUpgradeType = "";
     public List<GameObject> spawnedEnemies = new List<GameObject>();
     #endregion
@@ -39,6 +40,7 @@ public class PerformanceWaves : MonoBehaviour
     private bool checkingProgress = false;
     private float waveStartTime = 0f;
     private float minWaveDuration = 5f;
+    public bool GameUpgrade = false;
     #endregion
     private void Start()
     {
@@ -211,8 +213,15 @@ public class PerformanceWaves : MonoBehaviour
     {
         if (upgradePanel != null)
         {
+            GameUpgrade = true;
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 0f;
             upgradePanel.SetActive(true);
+            if (pauseMenu != null)
+            {
+                pauseMenu.UpgradeActive = true;
+            }    
         }
         else
         {
@@ -244,7 +253,14 @@ public class PerformanceWaves : MonoBehaviour
         {
             upgradePanel.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
+        GameUpgrade = false;
+        if (pauseMenu != null)
+        {
+            pauseMenu.UpgradeActive = false;
+        }
+        Time.timeScale = 1f;
         currentWaveIndex++;
         StartWave();
     }

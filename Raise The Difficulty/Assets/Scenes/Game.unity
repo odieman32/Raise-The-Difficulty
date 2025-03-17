@@ -15874,7 +15874,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00024414062, y: -1.2885132}
+  m_AnchoredPosition: {x: -0.00024414062, y: -1.2885742}
   m_SizeDelta: {x: 56.6888, y: 36.0746}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1307216424
@@ -15966,6 +15966,8 @@ MonoBehaviour:
     cost: 1
   - enemyPrefab: {fileID: 5032134528341062087, guid: 1a3f9355591356a44a24e0f16fdd1f8e, type: 3}
     cost: 2
+  - enemyPrefab: {fileID: 5032134528341062087, guid: 29a7ff2159e940f48b93294b7f7c6837, type: 3}
+    cost: 3
   enemiesToSpawn: []
   spawnLocation:
   - {fileID: 630959644}
@@ -15974,7 +15976,9 @@ MonoBehaviour:
   playerHit: {fileID: 470399273}
   upgradePanel: {fileID: 1307216422}
   playerController: {fileID: 5272552500100688339}
+  pauseMenu: {fileID: 1936419106}
   spawnedEnemies: []
+  GameUpgrade: 0
 --- !u!1 &1403805699
 GameObject:
   m_ObjectHideFlags: 0
@@ -17573,7 +17577,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00024414062, y: -1.2885132}
+  m_AnchoredPosition: {x: -0.00024414062, y: -1.2885742}
   m_SizeDelta: {x: 56.6888, y: 36.0746}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1751544133
@@ -52451,6 +52455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameIsPaused: 0
+  UpgradeActive: 0
   pauseMenuUI: {fileID: 1751544131}
 --- !u!114 &1936419107
 MonoBehaviour:
@@ -53407,15 +53412,16 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  swordAttack: {fileID: 1712346845}
-  pauseMenu: {fileID: 1936419106}
-  playerInput: {fileID: 5272552500100688338}
   maxStamina: 100
   currentStamina: 100
   staminaRecoveryRate: 5
   dashStaminaCost: 15
   attackStaminaCost: 10
   staminaBar: {fileID: 155117408}
+  swordAttack: {fileID: 1712346845}
+  pauseMenu: {fileID: 1936419106}
+  playerInput: {fileID: 5272552500100688338}
+  performance: {fileID: 1312628562}
   tr: {fileID: 5272552500100688340}
   attackSound: {fileID: 8300000, guid: 88b1cbe3caa3fee4b8b103b5edd7aba9, type: 3}
   dashSound: {fileID: 8300000, guid: f11db4559b3ffff45b62e9327fc5535d, type: 3}

@@ -12,9 +12,6 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 1f;
     public float collisionOffset = 0.05f;
     public ContactFilter2D movementFilter;
-    [SerializeField] SwordAttack swordAttack;
-    [SerializeField] PauseMenu pauseMenu;
-    [SerializeField] PlayerInput playerInput;
     #endregion
 
     #region Stamina
@@ -32,6 +29,10 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
     List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
+    [SerializeField] SwordAttack swordAttack;
+    [SerializeField] PauseMenu pauseMenu;
+    [SerializeField] PlayerInput playerInput;
+    [SerializeField] PerformanceWaves performance;
     #endregion
 
     #region Dash
@@ -74,7 +75,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isDashing)
         {
-           return;
+            return;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && canDash)
@@ -92,14 +93,15 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (pauseMenu.GameIsPaused == true)
+        if (pauseMenu.GameIsPaused == true || performance.GameUpgrade == true)
         {
             playerInput.enabled = false;
         }
-        else if (pauseMenu.GameIsPaused == false)
+        else if (pauseMenu.GameIsPaused == false || performance.GameUpgrade == false)
         {
             playerInput.enabled = true;
         }
+
 
         RecoverStamina();
     }
