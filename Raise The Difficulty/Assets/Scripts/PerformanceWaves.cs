@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PerformanceWaves : MonoBehaviour
 {
@@ -31,6 +33,7 @@ public class PerformanceWaves : MonoBehaviour
     public GameObject upgradePanel;
     public PlayerController playerController;
     public PauseMenu pauseMenu;
+    public Text difficultyIndicator;
     private string lastUpgradeType = "";
     public List<GameObject> spawnedEnemies = new List<GameObject>();
     #endregion
@@ -41,7 +44,13 @@ public class PerformanceWaves : MonoBehaviour
     private float waveStartTime = 0f;
     private float minWaveDuration = 5f;
     public bool GameUpgrade = false;
+    private Coroutine progressCoroutine;
+    private bool waveInProgress = false;
+    private bool upgradeInProgress = false;
+    private bool failInProgress = false;
     #endregion
+
+  
     private void Start()
     {
         InitializeWaves();
@@ -62,9 +71,12 @@ public class PerformanceWaves : MonoBehaviour
             spawnTimer -= Time.fixedDeltaTime;
         }
 
-        if (!checkingProgress && spawnedEnemies.Count == 0 && !isSpawning && enemiesToSpawn.Count == 0)
+        if (!checkingProgress && !GameUpgrade && !upgradeInProgress && !waveInProgress && !failInProgress && spawnedEnemies.Count == 0 && !isSpawning && enemiesToSpawn.Count == 0)
         {
-            StartCoroutine(WaitAndCheckWaveProgress());
+            if (progressCoroutine == null)
+            {
+                progressCoroutine = StartCoroutine(WaitAndCheckWaveProgress());
+            }           
         }
     }
 
@@ -81,6 +93,12 @@ public class PerformanceWaves : MonoBehaviour
 
     private void StartWave()
     {
+        if (progressCoroutine != null)
+        {
+            StopCoroutine(progressCoroutine);
+            progressCoroutine = null;
+        }
+
         if (gameOver)
         {
             Debug.Log("Game is Over");
@@ -97,9 +115,13 @@ public class PerformanceWaves : MonoBehaviour
 
         Debug.Log($"Starting Wave {currentWaveIndex}");
         isSpawning = true;
+        waveInProgress = true;
+        failInProgress = false;
         playerHit.ResetHits();
         enemiesToSpawn.Clear(); // Clear previous wave enemies
         spawnedEnemies.Clear(); // Clear any lingering enemies
+
+        playerHit.SetMaxHits(waves[currentWaveIndex].maxHitsAllowed);
 
         GenerateEnemies(waves[currentWaveIndex].wavePoints);
 
@@ -165,6 +187,8 @@ public class PerformanceWaves : MonoBehaviour
             enemiesToSpawn.RemoveAt(0);
             spawnIndex = (spawnIndex + 1) % spawnLocation.Length;
         }
+
+        waveInProgress = false;
     }
 
     private IEnumerator WaitAndCheckWaveProgress()
@@ -178,6 +202,47 @@ public class PerformanceWaves : MonoBehaviour
             CheckWaveProgress();
         }
         checkingProgress = false;
+        progressCoroutine = null;
+    }
+
+    private IEnumerator WaveSuccess()
+    {
+        waveInProgress = false;
+        upgradeInProgress = true;
+        failInProgress = false;
+        ShowDifficulty("Difficulty Raised");
+        yield return new WaitForSeconds(2f);
+        ShowUpgradePanel();
+        upgradeInProgress = false;
+    }
+
+    private IEnumerator WaveFailure()
+    {
+        if (failInProgress) yield break;
+        failInProgress = true;
+        waveInProgress = false;
+        ShowDifficulty("Difficulty Lowered");
+        yield return new WaitForSeconds(2f);
+        if (!string.IsNullOrEmpty(lastUpgradeType))
+        {
+            RevertLastUpgrade();
+            lastUpgradeType = "";
+        }
+        if (currentWaveIndex > 0 )
+        {
+            currentWaveIndex--;
+        }
+        failInProgress = false;
+        StartWave();
+    }
+
+    private IEnumerator HideDifficulty(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (difficultyIndicator != null )
+        {
+            difficultyIndicator.gameObject.SetActive(false);
+        }
     }
 
     private void CheckWaveProgress()
@@ -188,24 +253,13 @@ public class PerformanceWaves : MonoBehaviour
             return; // Do NOT progress until all enemies are gone
         }
 
-        if (playerHit.HitCount < waves[currentWaveIndex].maxHitsAllowed)
+        if (playerHit.hitCount < waves[currentWaveIndex].maxHitsAllowed)
         {
-            ShowUpgradePanel();
+            StartCoroutine(WaveSuccess());
         }
         else
         {
-            Debug.Log("Down Wave");
-            if (!string.IsNullOrEmpty(lastUpgradeType))
-            {
-                RevertLastUpgrade();
-                lastUpgradeType = "";
-            }
-
-            if (currentWaveIndex > 0)
-            {
-                currentWaveIndex--;
-            }
-            StartWave();
+            StartCoroutine(WaveFailure());
         }
     }
 
@@ -227,6 +281,16 @@ public class PerformanceWaves : MonoBehaviour
         {
             Debug.LogWarning("Panel not Assigned");
             ApplyUpgrade("");
+        }
+    }
+
+    private void ShowDifficulty(string message)
+    {
+        if (difficultyIndicator != null)
+        {
+            difficultyIndicator.text = message;
+            difficultyIndicator.gameObject.SetActive(true);
+            StartCoroutine(HideDifficulty(2f));
         }
     }
 
