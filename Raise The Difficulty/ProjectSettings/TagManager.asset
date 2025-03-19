@@ -60,6 +60,9 @@ TagManager:
   - name: Props
     uniqueID: 2867208901
     locked: 0
+  - name: Small Props
+    uniqueID: 1694569417
+    locked: 0
   - name: Enemies
     uniqueID: 270288801
     locked: 0
