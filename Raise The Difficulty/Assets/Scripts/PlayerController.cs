@@ -55,6 +55,10 @@ public class PlayerController : MonoBehaviour
     public int speedUpgradeLevel = 0;
     public int staminaRecoveryUpgradeLevel = 0;
     public int attackUpgradeLevel = 0;
+    public Text statsText;
+    public Text statsShowText;
+    private Color statsDefaultColor = Color.white;
+    private bool showStatText;
     #endregion
 
     // Start is called before the first frame update
@@ -69,6 +73,9 @@ public class PlayerController : MonoBehaviour
 
         currentStamina = maxStamina;
         UpdateStaminaUI();
+        UpdateStatsUI();
+
+        showStatText = true;
     }
 
     private void Update()
@@ -259,20 +266,48 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void UpdateStatsUI()
+    {
+        if (statsText != null)
+        {
+            statsText.text = $"Attack: {swordAttack.damage}\nSpeed: {moveSpeed}\nStamina Recovery: {staminaRecoveryRate}";
+        }
+    }
+
+    private IEnumerator ShowStatText(bool increased)
+    {
+        if (!showStatText) yield break;
+
+        if (statsShowText != null)
+        {
+            statsShowText.text = increased ? "Stats Up" : "Stats Down";
+            statsShowText.color = increased ? Color.green : Color.red;
+            statsShowText.gameObject.SetActive(true);
+            yield return new WaitForSeconds(2f);
+            statsShowText.gameObject.SetActive(false);
+        }
+    }
+
     public void UpgradeAttack()
     {
         swordAttack.damage += 1f;
         attackUpgradeLevel++;
+        UpdateStatsUI();
+        StartCoroutine(ShowStatText(true));
     }
     public void UpgradeSpeed()
     {
         moveSpeed += .5f;
         speedUpgradeLevel++;
+        UpdateStatsUI();
+        StartCoroutine(ShowStatText(true));
     }
     public void UpgradeStaminaRecovery()
     {
         staminaRecoveryRate += 5f;
         staminaRecoveryUpgradeLevel++;
+        UpdateStatsUI();
+        StartCoroutine(ShowStatText(true));
     }
     public void RevertAttack()
     {
@@ -280,6 +315,8 @@ public class PlayerController : MonoBehaviour
         {
             swordAttack.damage -= 1f;
             attackUpgradeLevel--;
+            UpdateStatsUI();
+            StartCoroutine(ShowStatText(false));
         }
     }
     public void RevertSpeed()
@@ -288,6 +325,8 @@ public class PlayerController : MonoBehaviour
         {
             moveSpeed -= 0.5f;
             speedUpgradeLevel--;
+            UpdateStatsUI();
+            StartCoroutine(ShowStatText(false));
         }
     }
     public void RevertStaminaRecovery()
@@ -296,6 +335,8 @@ public class PlayerController : MonoBehaviour
         {
             staminaRecoveryRate -= 5f;
             staminaRecoveryUpgradeLevel--;
+            UpdateStatsUI();
+            StartCoroutine(ShowStatText(false));
         }
     }
 }
