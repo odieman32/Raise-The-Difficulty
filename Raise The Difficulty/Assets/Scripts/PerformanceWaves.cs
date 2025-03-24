@@ -34,6 +34,7 @@ public class PerformanceWaves : MonoBehaviour
     public PlayerController playerController;
     public PauseMenu pauseMenu;
     public Text difficultyIndicator;
+    public GameObject winScreen;
     private string lastUpgradeType = "";
     public List<GameObject> spawnedEnemies = new List<GameObject>();
     #endregion
@@ -84,11 +85,11 @@ public class PerformanceWaves : MonoBehaviour
     {
         waves.Clear();
         waves.Add(new Wave { waveIndex = 0, wavePoints = 1, maxHitsAllowed = 8 });
-        waves.Add(new Wave { waveIndex = 1, wavePoints = 2, maxHitsAllowed = 7 });
-        waves.Add(new Wave { waveIndex = 2, wavePoints = 3, maxHitsAllowed = 6 });
-        waves.Add(new Wave { waveIndex = 3, wavePoints = 5, maxHitsAllowed = 5 });
-        waves.Add(new Wave { waveIndex = 4, wavePoints = 7, maxHitsAllowed = 4 });
-        waves.Add(new Wave { waveIndex = 5, wavePoints = 8, maxHitsAllowed = 3 });
+        waves.Add(new Wave { waveIndex = 1, wavePoints = 3, maxHitsAllowed = 7 });
+        waves.Add(new Wave { waveIndex = 2, wavePoints = 5, maxHitsAllowed = 6 });
+        waves.Add(new Wave { waveIndex = 3, wavePoints = 7, maxHitsAllowed = 5 });
+        waves.Add(new Wave { waveIndex = 4, wavePoints = 9, maxHitsAllowed = 4 });
+        waves.Add(new Wave { waveIndex = 5, wavePoints = 11, maxHitsAllowed = 3 });
     }
 
     private void StartWave()
@@ -99,15 +100,16 @@ public class PerformanceWaves : MonoBehaviour
             progressCoroutine = null;
         }
 
+        if (currentWaveIndex >= waves.Count)
+        {
+            Debug.Log("All waves complete");
+            gameOver = true;
+            WinScreen();
+            return;
+        }
         if (gameOver)
         {
             Debug.Log("Game is Over");
-            return;
-        }
-        if (currentWaveIndex >= waves.Count)
-        {
-            Debug.Log("ALl waves complete!");
-            gameOver = true;
             return;
         }
 
@@ -255,7 +257,16 @@ public class PerformanceWaves : MonoBehaviour
 
         if (playerHit.hitCount < waves[currentWaveIndex].maxHitsAllowed)
         {
-            StartCoroutine(WaveSuccess());
+            if (currentWaveIndex == waves.Count - 1)
+            {
+                Debug.Log("Final Wave Complete");
+                gameOver = true;
+                WinScreen();
+            }
+            else
+            {
+                StartCoroutine(WaveSuccess());
+            }
         }
         else
         {
@@ -344,6 +355,17 @@ public class PerformanceWaves : MonoBehaviour
                 break;
             default:
                 break;
+        }
+    }
+
+    private void WinScreen()
+    {
+        if (winScreen != null)
+        {
+            winScreen.SetActive(true);
+            Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 }
