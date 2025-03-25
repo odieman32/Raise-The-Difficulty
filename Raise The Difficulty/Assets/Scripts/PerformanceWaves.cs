@@ -84,12 +84,15 @@ public class PerformanceWaves : MonoBehaviour
     private void InitializeWaves()
     {
         waves.Clear();
-        waves.Add(new Wave { waveIndex = 0, wavePoints = 1, maxHitsAllowed = 8 });
-        waves.Add(new Wave { waveIndex = 1, wavePoints = 3, maxHitsAllowed = 7 });
-        waves.Add(new Wave { waveIndex = 2, wavePoints = 5, maxHitsAllowed = 6 });
-        waves.Add(new Wave { waveIndex = 3, wavePoints = 7, maxHitsAllowed = 5 });
-        waves.Add(new Wave { waveIndex = 4, wavePoints = 9, maxHitsAllowed = 4 });
-        waves.Add(new Wave { waveIndex = 5, wavePoints = 11, maxHitsAllowed = 3 });
+        waves.Add(new Wave { waveIndex = 0, wavePoints = 1, maxHitsAllowed = 10 });
+        waves.Add(new Wave { waveIndex = 1, wavePoints = 3, maxHitsAllowed = 10 });
+        waves.Add(new Wave { waveIndex = 2, wavePoints = 4, maxHitsAllowed = 10 });
+        waves.Add(new Wave { waveIndex = 3, wavePoints = 7, maxHitsAllowed = 9 });
+        waves.Add(new Wave { waveIndex = 4, wavePoints = 9, maxHitsAllowed = 9 });
+        waves.Add(new Wave { waveIndex = 5, wavePoints = 25, maxHitsAllowed = 8 });
+        waves.Add(new Wave { waveIndex = 5, wavePoints = 26, maxHitsAllowed = 8 });
+        waves.Add(new Wave { waveIndex = 5, wavePoints = 64, maxHitsAllowed = 7 });
+        waves.Add(new Wave { waveIndex = 5, wavePoints = 79, maxHitsAllowed = 7 });
     }
 
     private void StartWave()
@@ -183,7 +186,7 @@ public class PerformanceWaves : MonoBehaviour
         isSpawning = false;
         while (enemiesToSpawn.Count > 0)
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
             GameObject enemy = Instantiate(enemiesToSpawn[0], spawnLocation[spawnIndex].position, Quaternion.identity);
             spawnedEnemies.Add(enemy);
             enemiesToSpawn.RemoveAt(0);

@@ -13956,9 +13956,11 @@ MonoBehaviour:
   - enemyPrefab: {fileID: 5032134528341062087, guid: a3a577791457a8948b54867873b95838, type: 3}
     cost: 1
   - enemyPrefab: {fileID: 5032134528341062087, guid: 1a3f9355591356a44a24e0f16fdd1f8e, type: 3}
-    cost: 2
-  - enemyPrefab: {fileID: 5032134528341062087, guid: 29a7ff2159e940f48b93294b7f7c6837, type: 3}
     cost: 4
+  - enemyPrefab: {fileID: 5032134528341062087, guid: 29a7ff2159e940f48b93294b7f7c6837, type: 3}
+    cost: 9
+  - enemyPrefab: {fileID: 5032134528341062087, guid: d7af2244d8ca6ff498e8786dd957cbcb, type: 3}
+    cost: 26
   enemiesToSpawn: []
   spawnLocation:
   - {fileID: 630959644}
@@ -15602,7 +15604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swordCollider: {fileID: 1712346846}
-  damage: 1
+  damage: 0.5
 --- !u!61 &1712346846
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -21344,7 +21346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d9145105474ce4ba1a338e4381726f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2.5
+  moveSpeed: 2
   collisionOffset: 0.05
   movementFilter:
     useTriggers: 0

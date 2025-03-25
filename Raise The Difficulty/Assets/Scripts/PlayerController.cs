@@ -290,21 +290,21 @@ public class PlayerController : MonoBehaviour
 
     public void UpgradeAttack()
     {
-        swordAttack.damage += 1f;
+        swordAttack.damage += .5f;
         attackUpgradeLevel++;
         UpdateStatsUI();
         StartCoroutine(ShowStatText(true));
     }
     public void UpgradeSpeed()
     {
-        moveSpeed += .5f;
+        moveSpeed += .2f;
         speedUpgradeLevel++;
         UpdateStatsUI();
         StartCoroutine(ShowStatText(true));
     }
     public void UpgradeStaminaRecovery()
     {
-        staminaRecoveryRate += 5f;
+        staminaRecoveryRate += 3f;
         staminaRecoveryUpgradeLevel++;
         UpdateStatsUI();
         StartCoroutine(ShowStatText(true));
@@ -313,7 +313,7 @@ public class PlayerController : MonoBehaviour
     {
         if (attackUpgradeLevel > 0)
         {
-            swordAttack.damage -= 1f;
+            swordAttack.damage -= .5f;
             attackUpgradeLevel--;
             UpdateStatsUI();
             StartCoroutine(ShowStatText(false));
@@ -323,7 +323,7 @@ public class PlayerController : MonoBehaviour
     {
         if (speedUpgradeLevel > 0)
         {
-            moveSpeed -= 0.5f;
+            moveSpeed -= 0.2f;
             speedUpgradeLevel--;
             UpdateStatsUI();
             StartCoroutine(ShowStatText(false));
@@ -333,7 +333,7 @@ public class PlayerController : MonoBehaviour
     {
         if (attackUpgradeLevel > 0)
         {
-            staminaRecoveryRate -= 5f;
+            staminaRecoveryRate -= 3f;
             staminaRecoveryUpgradeLevel--;
             UpdateStatsUI();
             StartCoroutine(ShowStatText(false));

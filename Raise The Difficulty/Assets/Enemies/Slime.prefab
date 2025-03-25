@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 7763159515320253899}
   - component: {fileID: 7574952260828873969}
   - component: {fileID: 20673551922815643}
-  - component: {fileID: 8252517047815966437}
+  - component: {fileID: 5265960317293592916}
   - component: {fileID: 5367242057876503512}
   - component: {fileID: -5822324872885758832}
   m_Layer: 7
-  m_Name: Bat
+  m_Name: Slime
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.82, y: 0, z: 0}
-  m_LocalScale: {x: 4.6651254, y: 4.6651254, z: 4.6651254}
+  m_LocalScale: {x: 6.611702, y: 6.611702, z: 6.611702}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 270288801
   m_SortingLayer: 7
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7013631516640934163, guid: b438465a32eb63243a7889eb1f400d29, type: 3}
+  m_Sprite: {fileID: -6897147555146677718, guid: bbbae09279b66cb48b7d05525773c545, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +99,7 @@ Animator:
   m_GameObject: {fileID: 5032134528341062087}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fda7b36b4336ba54ea8596d84705dd04, type: 2}
+  m_Controller: {fileID: 9100000, guid: ca64a7f9fd7ca9643a4099276ac1f5df, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -137,8 +137,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!70 &8252517047815966437
-CapsuleCollider2D:
+--- !u!60 &5265960317293592916
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -169,9 +169,32 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0022364748, y: -0.0063543105}
-  m_Size: {x: 0.16329317, y: 0.16329317}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.64, y: 0.64}
+    newSize: {x: 4, y: 4}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.040000003, y: 0.04956313}
+      - {x: -0.05956313, y: -0.004271742}
+      - {x: -0.07431721, y: -0.05873631}
+      - {x: -0.09421992, y: -0.11288225}
+      - {x: -0.11912625, y: -0.13834949}
+      - {x: -0.13791263, y: -0.16956311}
+      - {x: 0.04, y: -0.16747575}
+      - {x: 0.07703888, y: -0.15956312}
+      - {x: 0.09850057, y: -0.110710494}
+      - {x: 0.07703887, y: -0.030436872}
+      - {x: 0.057198785, y: -0.014474236}
+      - {x: 0.052609418, y: 0.013162417}
+      - {x: 0.035825253, y: 0.045388374}
+  m_UseDelaunayMesh: 0
 --- !u!114 &5367242057876503512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,8 +207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f7fc277a8ef8c45a302372b5d7ea67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2.3
-  health: 1
+  moveSpeed: 0.9
+  health: 6
   hitSound: {fileID: 8300000, guid: 2b21ef916f6943c439b71a7c74568878, type: 3}
 --- !u!82 &-5822324872885758832
 AudioSource:
