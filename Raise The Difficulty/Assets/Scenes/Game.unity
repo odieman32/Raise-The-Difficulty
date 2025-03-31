@@ -13841,6 +13841,7 @@ GameObject:
   - component: {fileID: 1307216423}
   - component: {fileID: 1307216425}
   - component: {fileID: 1307216424}
+  - component: {fileID: 1307216426}
   m_Layer: 5
   m_Name: Upgrade Back Panel
   m_TagString: Untagged
@@ -13906,6 +13907,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1307216422}
   m_CullTransparentMesh: 1
+--- !u!225 &1307216426
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307216422}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1312628559
 GameObject:
   m_ObjectHideFlags: 0
@@ -13969,6 +13982,7 @@ MonoBehaviour:
   - {fileID: 1018567981}
   playerHit: {fileID: 470399273}
   upgradePanel: {fileID: 1307216422}
+  upgradeAnim: {fileID: 1936419108}
   playerController: {fileID: 5272552500100688339}
   pauseMenu: {fileID: 1936419106}
   difficultyIndicator: {fileID: 542855203}
@@ -16030,6 +16044,7 @@ GameObject:
   - component: {fileID: 1751544132}
   - component: {fileID: 1751544134}
   - component: {fileID: 1751544133}
+  - component: {fileID: 1751544135}
   m_Layer: 5
   m_Name: Pause BackPanel
   m_TagString: Untagged
@@ -16096,6 +16111,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1751544131}
   m_CullTransparentMesh: 1
+--- !u!225 &1751544135
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751544131}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1752445322
 GameObject:
   m_ObjectHideFlags: 0
@@ -20121,6 +20148,7 @@ GameObject:
   - component: {fileID: 1936419103}
   - component: {fileID: 1936419102}
   - component: {fileID: 1936419106}
+  - component: {fileID: 1936419108}
   - component: {fileID: 1936419107}
   m_Layer: 5
   m_Name: Game UI
@@ -20233,6 +20261,13 @@ MonoBehaviour:
   GameIsPaused: 0
   UpgradeActive: 0
   pauseMenuUI: {fileID: 1751544131}
+  pausePanelRect: {fileID: 1531286789}
+  staminaBar: {fileID: 865003995}
+  hitTracker: {fileID: 293431060}
+  canvasGroup: {fileID: 1751544135}
+  topPosY: 915
+  middlePosY: 6.3868
+  tweenDur: 0.5
 --- !u!114 &1936419107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20248,6 +20283,25 @@ MonoBehaviour:
   GameMixer: {fileID: 24100000, guid: 732b2aa7a685cd84da7e127bc038cb8d, type: 2}
   musicSlider: {fileID: 1197656028}
   SFXSlider: {fileID: 608474519}
+--- !u!114 &1936419108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936419101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cf3381a4b3893943af488faa0e0e243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradePanel: {fileID: 1886548349}
+  staminaBar: {fileID: 865003995}
+  hitTracker: {fileID: 293431060}
+  canvasGroup: {fileID: 1307216426}
+  topPosY: 813
+  middlePosY: -1.8062
+  tweenDur: 0.5
 --- !u!1001 &1938545524
 PrefabInstance:
   m_ObjectHideFlags: 0

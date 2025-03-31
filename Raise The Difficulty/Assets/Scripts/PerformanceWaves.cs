@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class PerformanceWaves : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class PerformanceWaves : MonoBehaviour
     #region References
     public PlayerHit playerHit;
     public GameObject upgradePanel;
+    public UpgradeAnim upgradeAnim;
     public PlayerController playerController;
     public PauseMenu pauseMenu;
     public Text difficultyIndicator;
@@ -282,6 +284,7 @@ public class PerformanceWaves : MonoBehaviour
         if (upgradePanel != null)
         {
             GameUpgrade = true;
+            upgradeAnim.UpgradeIntro();
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             Time.timeScale = 0f;
@@ -329,6 +332,7 @@ public class PerformanceWaves : MonoBehaviour
 
         if (upgradePanel != null)
         {
+            upgradeAnim.UpgradeOutro();
             upgradePanel.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;

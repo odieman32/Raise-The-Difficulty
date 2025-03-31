@@ -4,6 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
+using System.Threading.Tasks;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -11,6 +13,10 @@ public class PauseMenu : MonoBehaviour
     public bool UpgradeActive = false; 
 
     public GameObject pauseMenuUI; //game object for UI
+    [SerializeField] RectTransform pausePanelRect, staminaBar, hitTracker;
+    [SerializeField] CanvasGroup canvasGroup;
+    [SerializeField] float topPosY, middlePosY;
+    [SerializeField] float tweenDur;
 
     private void Update()
     {
@@ -29,8 +35,9 @@ public class PauseMenu : MonoBehaviour
             }
         }
     }
-    public void Resume()
+    public async void Resume()
     {
+        await PauseOutro();
         pauseMenuUI.SetActive(false); //all pause menu UI is set to false
         Time.timeScale = 1f; //resumes time back to normal
         GameIsPaused = false; //Game paused is put back to false
@@ -41,11 +48,13 @@ public class PauseMenu : MonoBehaviour
 
     void Pause()
     {
+        PauseIntro();
         pauseMenuUI.SetActive(true);//pause is set at active
         Time.timeScale = 0f; //stops the time of the game to freeze everything
         GameIsPaused = true; //Game is puased is set to true
         Cursor.lockState = CursorLockMode.None; //allows use of cursor to click buttons
         Cursor.visible = true; //cursor is visable
+        
     }
 
     public void Home()
@@ -53,5 +62,21 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(0);
         Time.timeScale = 1f;
     }
-}
 
+    void PauseIntro()
+    {
+        canvasGroup.DOFade(1, tweenDur).SetUpdate(true);
+        pausePanelRect.DOAnchorPosY(middlePosY, tweenDur).SetUpdate(true);
+        staminaBar.DOAnchorPosX(-530, tweenDur).SetUpdate(true);
+        hitTracker.DOAnchorPosY(93, tweenDur).SetUpdate(true);
+    }
+
+    async Task PauseOutro()
+    {
+        canvasGroup.DOFade(0, tweenDur).SetUpdate(true);
+        await pausePanelRect.DOAnchorPosY(topPosY, tweenDur).SetUpdate(true).AsyncWaitForCompletion();
+        staminaBar.DOAnchorPosX(-53, tweenDur).SetUpdate(true);
+        hitTracker.DOAnchorPosY(-115, tweenDur).SetUpdate(true);
+    }
+}
+//Rehope Games
