@@ -33,6 +33,7 @@ public class PerformanceWaves : MonoBehaviour
     public PlayerHit playerHit;
     public GameObject upgradePanel;
     public UpgradeAnim upgradeAnim;
+    public WinAnim winAnim;
     public PlayerController playerController;
     public PauseMenu pauseMenu;
     public Text difficultyIndicator;
@@ -369,6 +370,7 @@ public class PerformanceWaves : MonoBehaviour
     {
         if (winScreen != null)
         {
+            winAnim.WinIntro();
             winScreen.SetActive(true);
             Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.None;

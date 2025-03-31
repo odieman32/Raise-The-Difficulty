@@ -13983,6 +13983,7 @@ MonoBehaviour:
   playerHit: {fileID: 470399273}
   upgradePanel: {fileID: 1307216422}
   upgradeAnim: {fileID: 1936419108}
+  winAnim: {fileID: 1936419109}
   playerController: {fileID: 5272552500100688339}
   pauseMenu: {fileID: 1936419106}
   difficultyIndicator: {fileID: 542855203}
@@ -15021,6 +15022,7 @@ GameObject:
   - component: {fileID: 1546485300}
   - component: {fileID: 1546485302}
   - component: {fileID: 1546485301}
+  - component: {fileID: 1546485303}
   m_Layer: 5
   m_Name: Win Screen
   m_TagString: Untagged
@@ -15086,6 +15088,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546485299}
   m_CullTransparentMesh: 1
+--- !u!225 &1546485303
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546485299}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1567087030
 GameObject:
   m_ObjectHideFlags: 0
@@ -20150,6 +20164,7 @@ GameObject:
   - component: {fileID: 1936419106}
   - component: {fileID: 1936419108}
   - component: {fileID: 1936419107}
+  - component: {fileID: 1936419109}
   m_Layer: 5
   m_Name: Game UI
   m_TagString: Untagged
@@ -20301,6 +20316,25 @@ MonoBehaviour:
   canvasGroup: {fileID: 1307216426}
   topPosY: 813
   middlePosY: -1.8062
+  tweenDur: 0.5
+--- !u!114 &1936419109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936419101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9afa1752bfbe40d45b2f465af1c8c4aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winPanel: {fileID: 1023733256}
+  staminaBar: {fileID: 865003995}
+  hitTracker: {fileID: 293431060}
+  canvasGroup: {fileID: 1546485303}
+  topPosY: 859
+  middlePosY: 6.3868
   tweenDur: 0.5
 --- !u!1001 &1938545524
 PrefabInstance:
