@@ -13,7 +13,7 @@ public class PauseMenu : MonoBehaviour
     public bool UpgradeActive = false; 
 
     public GameObject pauseMenuUI; //game object for UI
-    [SerializeField] RectTransform pausePanelRect, staminaBar, hitTracker;
+    [SerializeField] RectTransform pausePanelRect, staminaBar, hitTracker, timerRect;
     [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] float topPosY, middlePosY;
     [SerializeField] float tweenDur;
@@ -69,6 +69,7 @@ public class PauseMenu : MonoBehaviour
         pausePanelRect.DOAnchorPosY(middlePosY, tweenDur).SetUpdate(true);
         staminaBar.DOAnchorPosX(-530, tweenDur).SetUpdate(true);
         hitTracker.DOAnchorPosY(93, tweenDur).SetUpdate(true);
+        timerRect.DOAnchorPosX(2194, tweenDur).SetUpdate(true);
     }
 
     async Task PauseOutro()
@@ -77,6 +78,7 @@ public class PauseMenu : MonoBehaviour
         await pausePanelRect.DOAnchorPosY(topPosY, tweenDur).SetUpdate(true).AsyncWaitForCompletion();
         staminaBar.DOAnchorPosX(-53, tweenDur).SetUpdate(true);
         hitTracker.DOAnchorPosY(-115, tweenDur).SetUpdate(true);
+        timerRect.DOAnchorPosX(1630, tweenDur).SetUpdate(true);
     }
 }
 //Rehope Games

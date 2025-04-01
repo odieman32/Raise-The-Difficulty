@@ -2277,6 +2277,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580665845}
   m_CullTransparentMesh: 1
+--- !u!1 &591538071
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 591538072}
+  - component: {fileID: 591538074}
+  - component: {fileID: 591538073}
+  m_Layer: 5
+  m_Name: Timer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &591538072
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591538071}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.7388477, y: 2.7388477, z: 2.7388477}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1936419105}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1630, y: -115}
+  m_SizeDelta: {x: 188.6061, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &591538073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591538071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
+    m_FontSize: 40
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 55
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &591538074
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591538071}
+  m_CullTransparentMesh: 1
 --- !u!1001 &606501298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13987,9 +14066,11 @@ MonoBehaviour:
   playerController: {fileID: 5272552500100688339}
   pauseMenu: {fileID: 1936419106}
   difficultyIndicator: {fileID: 542855203}
+  timerText: {fileID: 591538073}
   winScreen: {fileID: 1546485299}
   spawnedEnemies: []
   GameUpgrade: 0
+  waveTimeLimit: 60
 --- !u!1 &1375078347
 GameObject:
   m_ObjectHideFlags: 0
@@ -15134,8 +15215,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -58, y: 52}
-  m_SizeDelta: {x: 218.00098, y: 79.10022}
+  m_AnchoredPosition: {x: -48, y: 52}
+  m_SizeDelta: {x: 183.3904, y: 79.1002}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1567087032
 MonoBehaviour:
@@ -20249,6 +20330,7 @@ RectTransform:
   m_Children:
   - {fileID: 293431060}
   - {fileID: 542855202}
+  - {fileID: 591538072}
   - {fileID: 1567087031}
   - {fileID: 865003995}
   - {fileID: 1751544132}
@@ -20279,6 +20361,7 @@ MonoBehaviour:
   pausePanelRect: {fileID: 1531286789}
   staminaBar: {fileID: 865003995}
   hitTracker: {fileID: 293431060}
+  timerRect: {fileID: 591538072}
   canvasGroup: {fileID: 1751544135}
   topPosY: 915
   middlePosY: 6.3868
@@ -20313,6 +20396,7 @@ MonoBehaviour:
   upgradePanel: {fileID: 1886548349}
   staminaBar: {fileID: 865003995}
   hitTracker: {fileID: 293431060}
+  timerRect: {fileID: 591538072}
   canvasGroup: {fileID: 1307216426}
   topPosY: 813
   middlePosY: -1.8062
@@ -20332,6 +20416,7 @@ MonoBehaviour:
   winPanel: {fileID: 1023733256}
   staminaBar: {fileID: 865003995}
   hitTracker: {fileID: 293431060}
+  timerRect: {fileID: 591538072}
   canvasGroup: {fileID: 1546485303}
   topPosY: 859
   middlePosY: 6.3868
