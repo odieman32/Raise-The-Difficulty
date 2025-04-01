@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public float moveSpeed;
     private Vector3 directionToPlayer;
     private Vector3 localscale;
+    private bool isDefeated = false;
     #endregion
 
     #region EnemyHealth
@@ -56,7 +57,14 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MoveEnemy();
+        if (!isDefeated)
+        {
+            MoveEnemy();
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
 
     private void LateUpdate()
@@ -95,6 +103,7 @@ public class Enemy : MonoBehaviour
 
     public void Defeated()
     {
+        isDefeated = true;
         animator.SetTrigger("Defeated");
         Collider2D.enabled = false;
     }

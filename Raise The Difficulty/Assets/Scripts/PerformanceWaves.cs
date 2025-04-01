@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
+using System.Xml.Serialization;
 
 public class PerformanceWaves : MonoBehaviour
 {
@@ -31,9 +33,12 @@ public class PerformanceWaves : MonoBehaviour
     #region References
     public PlayerHit playerHit;
     public GameObject upgradePanel;
+    public UpgradeAnim upgradeAnim;
+    public WinAnim winAnim;
     public PlayerController playerController;
     public PauseMenu pauseMenu;
     public Text difficultyIndicator;
+    public Text timerText;
     public GameObject winScreen;
     private string lastUpgradeType = "";
     public List<GameObject> spawnedEnemies = new List<GameObject>();
@@ -51,13 +56,47 @@ public class PerformanceWaves : MonoBehaviour
     private bool failInProgress = false;
     #endregion
 
-  
+    #region Timer
+    public float waveTimeLimit = 30f;
+    private float currentWaveTime = 0f;
+    #endregion
+
     private void Start()
     {
         InitializeWaves();
         StartWave();
     }
 
+    private void Update()
+    {
+        if (!gameOver && !GameUpgrade)
+        {
+            if (currentWaveIndex >= 5)
+            {
+
+                currentWaveTime -= Time.deltaTime;
+
+                if (currentWaveTime < 0)
+                {
+                    currentWaveTime = 0;
+                }
+                UpdateTimerUI();
+
+                if (currentWaveTime <= 0 && (spawnedEnemies.Count > 0 || enemiesToSpawn.Count > 0)
+                    && !failInProgress && !upgradeInProgress)
+                {
+                    StartCoroutine(WaveFailure());
+                }
+            }
+            else
+            {
+                if (timerText != null)
+                {
+                    timerText.text = "";
+                }
+            }
+        }
+    }
     private void FixedUpdate()
     {
         spawnedEnemies.RemoveAll(item => item == null);
@@ -114,6 +153,17 @@ public class PerformanceWaves : MonoBehaviour
         {
             Debug.Log("Game is Over");
             return;
+        }
+
+        if (currentWaveIndex >= 5)
+        {
+            currentWaveTime = waveTimeLimit;
+            UpdateTimerUI();
+        }
+        else
+        {
+            if (timerText != null)
+                timerText.text = "";
         }
 
         waveStartTime = Time.time;
@@ -282,6 +332,7 @@ public class PerformanceWaves : MonoBehaviour
         if (upgradePanel != null)
         {
             GameUpgrade = true;
+            upgradeAnim.UpgradeIntro();
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             Time.timeScale = 0f;
@@ -329,6 +380,7 @@ public class PerformanceWaves : MonoBehaviour
 
         if (upgradePanel != null)
         {
+            upgradeAnim.UpgradeOutro();
             upgradePanel.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -365,10 +417,19 @@ public class PerformanceWaves : MonoBehaviour
     {
         if (winScreen != null)
         {
+            winAnim.WinIntro();
             winScreen.SetActive(true);
             Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+        }
+    }
+
+    private void UpdateTimerUI()
+    {
+        if (timerText != null)
+        {
+            timerText.text = "Time: " + Mathf.Ceil(currentWaveTime).ToString();
         }
     }
 }
