@@ -240,7 +240,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(movementInput.x * dashingPower, movementInput.y * dashingPower);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
-        rb.velocity = new Vector2(movementInput.x = 0, movementInput.y = 0);
+        rb.velocity =Vector2.zero;
         tr.emitting = false;
         rb.gravityScale = originalGravity;
         isDashing = false;
