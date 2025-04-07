@@ -129,9 +129,10 @@ public class PerformanceWaves : MonoBehaviour
         waves.Add(new Wave { waveIndex = 3, wavePoints = 7, maxHitsAllowed = 9 });
         waves.Add(new Wave { waveIndex = 4, wavePoints = 9, maxHitsAllowed = 9 });
         waves.Add(new Wave { waveIndex = 5, wavePoints = 25, maxHitsAllowed = 8 });
-        waves.Add(new Wave { waveIndex = 5, wavePoints = 26, maxHitsAllowed = 8 });
-        waves.Add(new Wave { waveIndex = 5, wavePoints = 64, maxHitsAllowed = 7 });
-        waves.Add(new Wave { waveIndex = 5, wavePoints = 79, maxHitsAllowed = 7 });
+        waves.Add(new Wave { waveIndex = 6, wavePoints = 26, maxHitsAllowed = 8 });
+        waves.Add(new Wave { waveIndex = 7, wavePoints = 64, maxHitsAllowed = 7 });
+        waves.Add(new Wave { waveIndex = 8, wavePoints = 79, maxHitsAllowed = 7 });
+        waves.Add(new Wave { waveIndex = 9, wavePoints = 80, maxHitsAllowed = 5 });
     }
 
     private void StartWave()

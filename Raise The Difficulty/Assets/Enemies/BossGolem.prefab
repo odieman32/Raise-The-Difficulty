@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4942558543323638962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8819025571686801975}
+  m_Layer: 7
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8819025571686801975
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4942558543323638962}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.122, y: -0.056, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4634916820130489243}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5032134528341062087
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,7 +44,7 @@ GameObject:
   - component: {fileID: 7574952260828873969}
   - component: {fileID: 20673551922815643}
   - component: {fileID: 2217262176903052505}
-  - component: {fileID: 5367242057876503512}
+  - component: {fileID: 6376820474384007282}
   - component: {fileID: -5822324872885758832}
   m_Layer: 7
   m_Name: BossGolem
@@ -36,6 +67,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1112213613148691108}
+  - {fileID: 8819025571686801975}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7763159515320253899
@@ -202,7 +234,7 @@ PolygonCollider2D:
       - {x: 0.073078476, y: -0.074744314}
       - {x: 0.1019241, y: -0.016921505}
   m_UseDelaunayMesh: 0
---- !u!114 &5367242057876503512
+--- !u!114 &6376820474384007282
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -211,12 +243,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5032134528341062087}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85f7fc277a8ef8c45a302372b5d7ea67, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a0a9f575d2f22949b1d8f96c7c66b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.3
-  health: 2
+  health: 20
   hitSound: {fileID: 8300000, guid: 2b21ef916f6943c439b71a7c74568878, type: 3}
+  projectilePrefab: {fileID: 1257435662549938831, guid: bcab6730bf167654397ca2c633e85fe9, type: 3}
+  firePoint: {fileID: 4942558543323638962}
+  projectileSpeed: 7.5
+  shootCooldown: 2.2
 --- !u!82 &-5822324872885758832
 AudioSource:
   m_ObjectHideFlags: 0

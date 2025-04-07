@@ -8,6 +8,7 @@ TagManager:
   - WaveSpawner
   - Sword
   - Hitbox
+  - Projectile
   layers:
   - Default
   - TransparentFX
