@@ -61,9 +61,17 @@ public class PerformanceWaves : MonoBehaviour
     private float currentWaveTime = 0f;
     #endregion
 
+    #region Boss Health UI
+    public GameObject bossBar;
+    public BossHealthbar bossHealthBar;
+    private BossEnemy currentBoss;
+    #endregion
+
+
     private void Start()
     {
         InitializeWaves();
+        bossBar.SetActive(false);
         StartWave();
     }
 
@@ -188,6 +196,15 @@ public class PerformanceWaves : MonoBehaviour
         }
 
         Debug.Log($"Wave {currentWaveIndex}: Spawning {enemiesToSpawn.Count} enemies.");
+
+        if (currentWaveIndex == waves.Count - 1)
+        {
+            bossBar.SetActive(true);
+        }
+        else
+        {
+            bossBar.SetActive(false);
+        }
     }
 
     private void GenerateEnemies(int wavePoints)
@@ -242,6 +259,16 @@ public class PerformanceWaves : MonoBehaviour
             spawnedEnemies.Add(enemy);
             enemiesToSpawn.RemoveAt(0);
             spawnIndex = (spawnIndex + 1) % spawnLocation.Length;
+
+            if (currentWaveIndex == waves.Count - 1)
+            {
+                BossEnemy boss = enemy.GetComponent<BossEnemy>();
+                if (boss != null)
+                {
+                    currentBoss = boss;
+                    bossHealthBar.SetBoss(boss);
+                }
+            }
         }
 
         waveInProgress = false;
@@ -315,6 +342,7 @@ public class PerformanceWaves : MonoBehaviour
             {
                 Debug.Log("Final Wave Complete");
                 gameOver = true;
+                bossBar.SetActive(false);
                 WinScreen();
             }
             else
