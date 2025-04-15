@@ -119,7 +119,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5032134528341062087}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -188,6 +188,11 @@ MonoBehaviour:
   moveSpeed: 1
   health: 2
   hitSound: {fileID: 8300000, guid: 2b21ef916f6943c439b71a7c74568878, type: 3}
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.1
+  flashCount: 2
+  knockbackForce: 2
+  knockbackDuration: 0.4
 --- !u!82 &-5822324872885758832
 AudioSource:
   m_ObjectHideFlags: 0

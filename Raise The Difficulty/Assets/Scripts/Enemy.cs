@@ -19,9 +19,24 @@ public class Enemy : MonoBehaviour
     Collider2D Collider2D;
     #endregion
 
-    #region
+    #region Audio
     [SerializeField] AudioClip hitSound;
     private AudioSource audioSource;
+    #endregion
+
+    #region color change
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
+    public Color flashColor = Color.red;
+    public float flashDuration = .1f;
+    public int flashCount = 2;
+    private bool isFlashing = false;
+    #endregion
+
+    #region Knockback
+    public float knockbackForce = 5f;
+    public float knockbackDuration = .2f;
+    private bool isKnockedBack = false;
     #endregion
 
     private PlayerHit hit;
@@ -53,18 +68,24 @@ public class Enemy : MonoBehaviour
         hit = FindAnyObjectByType(typeof (PlayerHit)) as PlayerHit;
         Collider2D = GetComponent<Collider2D>();
         audioSource = GetComponent<AudioSource>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
     }
 
     private void FixedUpdate()
     {
-        if (!isDefeated)
-        {
-            MoveEnemy();
-        }
-        else
+        if (isDefeated)
         {
             rb.velocity = Vector2.zero;
+            return;
         }
+        
+        if (isKnockedBack)
+        {
+            return;
+        }
+
+        MoveEnemy();
     }
 
     private void LateUpdate()
@@ -93,12 +114,50 @@ public class Enemy : MonoBehaviour
         {
             animator.SetTrigger("Hit");
             GetComponent<AudioSource>().PlayOneShot(hitSound);
+
+            if (!isFlashing)
+            {
+                StartCoroutine(FlashDamage());
+            }
+
+            if (!isKnockedBack)
+            {
+                StartCoroutine(ApplyKnockback(collision.transform));
+            }
         }
 
         if (collision.tag == "Hitbox")
         {
             hit.RegisterHit();
         }
+    }
+
+    private IEnumerator FlashDamage()
+    {
+        isFlashing = true;
+
+        for (int i = 0; i < flashCount; i++)
+        {
+            spriteRenderer.color = flashColor;
+            yield return new WaitForSeconds(flashDuration);
+            spriteRenderer.color = originalColor;
+            yield return new WaitForSeconds(flashDuration);
+        }
+
+        isFlashing = false;
+    }
+
+    private IEnumerator ApplyKnockback(Transform source)
+    {
+        isKnockedBack = true;
+
+        Vector2 knockDir = (transform.position - source.position).normalized;
+        rb.velocity = Vector2.zero;
+        rb.AddForce(knockDir * knockbackForce, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(knockbackDuration);
+
+        isKnockedBack = false;
     }
 
     public void Defeated()
