@@ -15,7 +15,7 @@ public class PlayerHit : MonoBehaviour
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInParent<Animator>();
         UpdateHitsUI();
     }
 
@@ -24,6 +24,8 @@ public class PlayerHit : MonoBehaviour
         hitCount++;
         Debug.Log("Player Hit!" + hitCount);
         UpdateHitsUI();
+
+        animator.SetTrigger("isHit");
     }
 
     public void ResetHits()

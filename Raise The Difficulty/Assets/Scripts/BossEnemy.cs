@@ -32,7 +32,20 @@ public class BossEnemy : MonoBehaviour
     private float shootTimer;
     #endregion
 
+    #region color change
+    private SpriteRenderer spriteRenderer;
+    private Color bossOriginalColor;
+    public Color bossFlashColor = Color.red;
+    public float bossFlashDuration = .1f;
+    public int bossFlashCount = 2;
+    private bool bossIsFlashing = false;
+    #endregion
 
+    #region Knockback
+    public float bossKnockbackForce = 5f;
+    public float bossKnockbackDuration = .2f;
+    private bool bossIsKnockedBack = false;
+    #endregion
 
     private PlayerHit hit;
     public float Health
@@ -63,20 +76,26 @@ public class BossEnemy : MonoBehaviour
         hit = FindAnyObjectByType(typeof(PlayerHit)) as PlayerHit;
         Collider2D = GetComponent<Collider2D>();
         audioSource = GetComponent<AudioSource>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        bossOriginalColor = spriteRenderer.color;
         shootTimer = shootCooldown;
     }
 
     private void FixedUpdate()
     {
-        if (!isDefeated)
-        {
-            MoveEnemy();
-            ShootAtPlayer();
-        }
-        else
+        if (isDefeated)
         {
             rb.velocity = Vector2.zero;
+            return;
         }
+
+        if (bossIsKnockedBack)
+        {
+            return;
+        }
+
+        MoveEnemy();
+        ShootAtPlayer();
     }
 
     private void LateUpdate()
@@ -101,9 +120,8 @@ public class BossEnemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Sword"))
+        if (collision.tag == "Sword")
         {
-            
             var sword = collision.GetComponent<SwordAttack>();
             if (sword != null)
             {
@@ -111,9 +129,59 @@ public class BossEnemy : MonoBehaviour
             }
 
             animator.SetTrigger("Hit");
-            audioSource.PlayOneShot(hitSound);
-            return;
+            GetComponent<AudioSource>().PlayOneShot(hitSound);
+
+            if (!bossIsFlashing)
+            {
+                StartCoroutine(BossFlashDamage());
+            }
+
+            if (!bossIsKnockedBack)
+            {
+                StartCoroutine(BossApplyKnockback(collision.transform));
+            }
         }
+
+        if (collision.tag == "Hitbox")
+        {
+            hit.RegisterHit();
+        }
+
+        if (collision.tag == "Player")
+        {
+            if (!bossIsKnockedBack)
+            {
+                StartCoroutine(BossApplyKnockback(collision.transform));
+            }
+        }
+    }
+
+    private IEnumerator BossFlashDamage()
+    {
+        bossIsFlashing = true;
+
+        for (int i = 0; i < bossFlashCount; i++)
+        {
+            spriteRenderer.color = bossFlashColor;
+            yield return new WaitForSeconds(bossFlashDuration);
+            spriteRenderer.color = bossOriginalColor;
+            yield return new WaitForSeconds(bossFlashDuration);
+        }
+
+        bossIsFlashing = false;
+    }
+
+    private IEnumerator BossApplyKnockback(Transform source)
+    {
+        bossIsKnockedBack = true;
+
+        Vector2 knockDir = (transform.position - source.position).normalized;
+        rb.velocity = Vector2.zero;
+        rb.AddForce(knockDir * bossKnockbackForce, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(bossKnockbackDuration);
+
+        bossIsKnockedBack = false;
     }
 
     public void Defeated()

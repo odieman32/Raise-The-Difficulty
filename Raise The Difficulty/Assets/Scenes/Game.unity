@@ -394,9 +394,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1871893182}
     m_Modifications:
+    - target: {fileID: 636800498181069085, guid: 16a799d27278916459e10345fab96963, type: 3}
+      propertyPath: m_Size.y
+      value: 1.2292738
+      objectReference: {fileID: 0}
+    - target: {fileID: 636800498181069085, guid: 16a799d27278916459e10345fab96963, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.1353631
+      objectReference: {fileID: 0}
     - target: {fileID: 3347543616739314965, guid: 16a799d27278916459e10345fab96963, type: 3}
       propertyPath: m_SortingLayer
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3347543616739314965, guid: 16a799d27278916459e10345fab96963, type: 3}
       propertyPath: m_SortingLayerID
@@ -2151,10 +2159,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1936419105}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 968.05286, y: -115}
-  m_SizeDelta: {x: 261.05, y: 50}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 8.052856, y: -115}
+  m_SizeDelta: {x: 261.05005, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &542855203
 MonoBehaviour:
@@ -2309,10 +2317,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1936419105}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1630, y: -115}
-  m_SizeDelta: {x: 188.6061, y: 50}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -290, y: -115}
+  m_SizeDelta: {x: 188.6062, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &591538073
 MonoBehaviour:
@@ -2638,9 +2646,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1871893182}
     m_Modifications:
+    - target: {fileID: 636800498181069085, guid: 16a799d27278916459e10345fab96963, type: 3}
+      propertyPath: m_Size.y
+      value: 1.229274
+      objectReference: {fileID: 0}
+    - target: {fileID: 636800498181069085, guid: 16a799d27278916459e10345fab96963, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.13536298
+      objectReference: {fileID: 0}
     - target: {fileID: 3347543616739314965, guid: 16a799d27278916459e10345fab96963, type: 3}
       propertyPath: m_SortingLayer
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3347543616739314965, guid: 16a799d27278916459e10345fab96963, type: 3}
       propertyPath: m_SortingLayerID
@@ -3529,7 +3545,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -62, y: -94}
+  m_AnchoredPosition: {x: -62, y: -70}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &967587776
@@ -4097,9 +4113,9 @@ RectTransform:
   - {fileID: 1180184318}
   m_Father: {fileID: 1936419105}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1332, y: -93}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 1332, y: 396}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1015506883
@@ -4436,6 +4452,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1871893182}
     m_Modifications:
+    - target: {fileID: 636800498181069085, guid: 16a799d27278916459e10345fab96963, type: 3}
+      propertyPath: m_Size.y
+      value: 1.2292736
+      objectReference: {fileID: 0}
+    - target: {fileID: 636800498181069085, guid: 16a799d27278916459e10345fab96963, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.13536322
+      objectReference: {fileID: 0}
     - target: {fileID: 3347543616739314965, guid: 16a799d27278916459e10345fab96963, type: 3}
       propertyPath: m_SortingLayer
       value: 5
@@ -15315,9 +15339,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1871893182}
     m_Modifications:
+    - target: {fileID: 636800498181069085, guid: 16a799d27278916459e10345fab96963, type: 3}
+      propertyPath: m_Size.y
+      value: 1.2520964
+      objectReference: {fileID: 0}
+    - target: {fileID: 636800498181069085, guid: 16a799d27278916459e10345fab96963, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.12395179
+      objectReference: {fileID: 0}
     - target: {fileID: 3347543616739314965, guid: 16a799d27278916459e10345fab96963, type: 3}
       propertyPath: m_SortingLayer
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3347543616739314965, guid: 16a799d27278916459e10345fab96963, type: 3}
       propertyPath: m_SortingLayerID

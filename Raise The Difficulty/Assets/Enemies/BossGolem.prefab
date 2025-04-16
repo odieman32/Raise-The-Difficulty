@@ -151,11 +151,11 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5032134528341062087}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 3
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -253,6 +253,11 @@ MonoBehaviour:
   firePoint: {fileID: 4942558543323638962}
   projectileSpeed: 7.5
   shootCooldown: 2.2
+  bossFlashColor: {r: 1, g: 0, b: 0, a: 1}
+  bossFlashDuration: 0.1
+  bossFlashCount: 2
+  bossKnockbackForce: 2
+  bossKnockbackDuration: 0.4
 --- !u!82 &-5822324872885758832
 AudioSource:
   m_ObjectHideFlags: 0
