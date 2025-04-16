@@ -130,6 +130,14 @@ public class Enemy : MonoBehaviour
         {
             hit.RegisterHit();
         }
+
+        if (collision.tag == "Player")
+        {
+            if (!isKnockedBack)
+            {
+                StartCoroutine(ApplyKnockback(collision.transform));
+            }
+        }
     }
 
     private IEnumerator FlashDamage()
