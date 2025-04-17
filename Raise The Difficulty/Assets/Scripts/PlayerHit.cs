@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class PlayerHit : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class PlayerHit : MonoBehaviour
     public PerformanceWaves waves;
     public Color normalColor = Color.white;
     public Color dangerColor = Color.red;
+
+    [SerializeField] private CinemachineImpulseSource impulseSource;
 
     private void Start()
     {
@@ -26,6 +29,11 @@ public class PlayerHit : MonoBehaviour
         UpdateHitsUI();
 
         animator.SetTrigger("isHit");
+
+        if (impulseSource != null )
+        {
+            impulseSource.GenerateImpulse();
+        }
     }
 
     public void ResetHits()

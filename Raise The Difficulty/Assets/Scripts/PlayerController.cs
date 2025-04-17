@@ -61,6 +61,12 @@ public class PlayerController : MonoBehaviour
     private bool showStatText;
     #endregion
 
+    #region Afterimage
+    [SerializeField] private GameObject afterImage;
+    [SerializeField] private float afterImageSpawnRate = 0.05f;
+    private Coroutine afterImageRoutine;
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
@@ -235,17 +241,44 @@ public class PlayerController : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
+
+        afterImageRoutine = StartCoroutine(SpawnAfterImage());
+
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         rb.velocity = new Vector2(movementInput.x * dashingPower, movementInput.y * dashingPower);
         tr.emitting = true;
+
         yield return new WaitForSeconds(dashingTime);
+
+        if (afterImageRoutine != null)
+        {
+            StopCoroutine(afterImageRoutine);
+        }
+
         rb.velocity =Vector2.zero;
         tr.emitting = false;
         rb.gravityScale = originalGravity;
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+    }
+
+    private IEnumerator SpawnAfterImage()
+    {
+        var sr = GetComponent<SpriteRenderer>();
+
+        while (isDashing)
+        {
+            var go = Instantiate(afterImage, transform.position, transform.rotation);
+            var ghostSr = go.GetComponent<SpriteRenderer>();
+
+            ghostSr.sprite = sr.sprite;
+            ghostSr.flipX = sr.flipX;
+            ghostSr.sortingOrder = sr.sortingOrder - 1;
+
+            yield return new WaitForSeconds(afterImageSpawnRate);
+        }
     }
 
     private void RecoverStamina()
