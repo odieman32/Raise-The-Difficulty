@@ -30,6 +30,8 @@ public class PlayerHit : MonoBehaviour
 
         animator.SetTrigger("isHit");
 
+
+
         if (impulseSource != null )
         {
             impulseSource.GenerateImpulse();
