@@ -2,9 +2,15 @@ This project is to be used in unity and it is to show off an adpative difficulty
 The objective of the game is to raise the difficulty of the game until you get to the hardest difficulty and defeat the boss. 
 Once the boss is defeated you win, but there is a catch.
 Each difficulty has criteria you must meet in order to go up in difficulty.
-This could consist of number if hits on the plyer, timing or accuracy. 
+This could consist of number if hits on the player or a time limit. 
 Each level you will be able to upgrade a stat on your character.
 Good luck and have fun!
+
+Controls:
+WASD - Move
+Space - Dodge
+Left Click - Attack
+Tab - Pause
 
 MVP Developement
 
