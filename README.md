@@ -7,9 +7,9 @@ Each level you will be able to upgrade a stat on your character.
 Good luck and have fun!
 
 Controls:
-WASD - Move
-Space - Dodge
-Left Click - Attack
+WASD - Move, 	
+Space - Dodge, 
+Left Click - Attack, 
 Tab - Pause
 
 MVP Developement
