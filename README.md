@@ -12,6 +12,7 @@ Space - Dodge,
 Left Click - Attack, 
 Tab - Pause
 
+Old Development: 
 MVP Developement
 
 Currently the MVP includes a temporary wave spawner, UI for hit count and UI for stamina bar (does not work yet), a moving character with an attack and dash, and enemies that spawn.
