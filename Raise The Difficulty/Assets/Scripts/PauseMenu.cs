@@ -69,7 +69,7 @@ public class PauseMenu : MonoBehaviour
         pausePanelRect.DOAnchorPosY(middlePosY, tweenDur).SetUpdate(true);
         staminaBar.DOAnchorPosX(-530, tweenDur).SetUpdate(true);
         hitTracker.DOAnchorPosY(93, tweenDur).SetUpdate(true);
-        timerRect.DOAnchorPosX(2194, tweenDur).SetUpdate(true);
+        timerRect.DOAnchorPosX(297, tweenDur).SetUpdate(true);
     }
 
     async Task PauseOutro()
@@ -78,7 +78,7 @@ public class PauseMenu : MonoBehaviour
         await pausePanelRect.DOAnchorPosY(topPosY, tweenDur).SetUpdate(true).AsyncWaitForCompletion();
         staminaBar.DOAnchorPosX(-53, tweenDur).SetUpdate(true);
         hitTracker.DOAnchorPosY(-115, tweenDur).SetUpdate(true);
-        timerRect.DOAnchorPosX(1630, tweenDur).SetUpdate(true);
+        timerRect.DOAnchorPosX(-290, tweenDur).SetUpdate(true);
     }
 }
 //Rehope Games
