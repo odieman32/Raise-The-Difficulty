@@ -10,7 +10,6 @@ The objective is simple: **climb through increasing levels of difficulty** until
 
 - Surviving for a certain amount of time
 - Taking minimal hits
-- Achieving kill counts or performance-based objectives
 
 As you progress through each level, you'll also have the opportunity to **upgrade your character's stats**, adding a layer of strategy to how you play.
 
