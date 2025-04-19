@@ -14246,6 +14246,8 @@ MonoBehaviour:
   attackUpgradeLevel: 0
   statsText: {fileID: 0}
   statsShowText: {fileID: 0}
+  afterImage: {fileID: 0}
+  afterImageSpawnRate: 0.05
 --- !u!70 &1426392151
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
