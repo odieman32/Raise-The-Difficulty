@@ -1,26 +1,91 @@
-This project is to be used in unity and it is to show off an adpative difficulty system.
-The objective of the game is to raise the difficulty of the game until you get to the hardest difficulty and defeat the boss. 
-Once the boss is defeated you win, but there is a catch.
-Each difficulty has criteria you must meet in order to go up in difficulty.
-This could consist of number if hits on the player or a time limit. 
-Each level you will be able to upgrade a stat on your character.
-Good luck and have fun!
+# 🎮 Raise The Difficulty – Unity Project
 
-Controls:
-WASD - Move, 	
-Space - Dodge, 
-Left Click - Attack, 
-Tab - Pause
+Welcome to the **Adaptive Difficulty Game**, a 2D action game built in Unity designed to showcase a scalable difficulty system that adapts based on player performance. This project highlights gameplay progression, player upgrades, and challenging enemies culminating in a final boss fight.
 
-Old Development: 
-MVP Developement
+---
 
-Currently the MVP includes a temporary wave spawner, UI for hit count and UI for stamina bar (does not work yet), a moving character with an attack and dash, and enemies that spawn.
-Also, I have a main menu screen and terrain laid out for the character. 
-I am working to make the dash a little better and figuring out a way to make a point-based spawner. This will allow for player performance to be the key aspect of the game.
-I have learned a lot about 2D development, spawners and over all game design of characters. I am still learning and look forward to how this project will turn out. 
-Through feedback, I will be actively looking to make characters stop moving when hit and make the dashes feel better. Also, there will be added audio to the game later. 
-The terrain will change for later to make the spawning locations better. I will add different enemy types to the game for variety as well. 
+## 🚀 Game Concept
 
-[Game Design Document.docx](https://github.com/user-attachments/files/18917411/Game.Design.Document.docx)
+The objective is simple: **climb through increasing levels of difficulty** until you defeat the final boss — but there's a twist. Each difficulty level has **specific criteria** you must meet to advance, such as:
+
+- Surviving for a certain amount of time
+- Taking minimal hits
+
+As you progress through each level, you'll also have the opportunity to **upgrade your character's stats**, adding a layer of strategy to how you play.
+
+**Good luck, and have fun!**
+
+---
+
+## 🎮 Controls
+
+| Action         | Key        |
+|----------------|------------|
+| Move           | `W A S D`  |
+| Dodge / Dash   | `Space`    |
+| Attack         | `Left Click` |
+| Pause Menu     | `Tab`      |
+
+---
+
+## 🛠️ Development Phases
+
+### ✅ Current MVP Features
+
+- 🧠 **Temporary wave spawner**
+- 🧪 **UI Elements**:
+  - Hit count tracker
+  - Stamina bar (non-functional currently)
+- 🦾 **Player movement, dash, and attack mechanics**
+- 👾 **Basic enemy spawn system**
+- 🗺️ **Main menu screen and terrain layout**
+
+---
+
+### 🔄 In Progress / Planned Features - Finished
+
+- 🌀 Improving dash mechanics and responsiveness  
+- 🎯 Developing a **performance-based spawner** (point system for scaling difficulty)  
+- 🎨 Updating terrain for improved enemy spawn placement  
+- 🧟‍♂️ Adding **varied enemy types**  
+- 🔉 Integrating **audio feedback** (SFX and background music)  
+- 🧍‍♂️ Enhancing **hit feedback** (e.g., enemies pause or react when hit)
+
+---
+
+## 📚 Developer Insights
+
+This project has been a major learning experience in:
+
+- Unity's 2D systems
+- Creating and managing **spawner logic**
+- Character design and control flow
+- UI design for gameplay feedback
+
+Through iteration and feedback, this game continues to evolve — and your suggestions are welcome!
+
+---
+
+## 💬 Feedback & Contribution
+
+Feel free to fork, contribute, or submit issues for improvement ideas. I'm actively developing and learning through this project — any feedback or ideas are greatly appreciated.
+
+---
+
+## 🔧 Requirements
+
+- Unity 2021.3+ (or higher)
+- PC or Mac for development
+- Basic C# knowledge for Unity scripting
+
+---
+
+## 📌 Summary
+
+> **This project is about challenging yourself. Every enemy wave, every dash, every decision — it all matters. Prove yourself worthy, adapt, and conquer.**
+>  [Game Design Document.docx](https://github.com/user-attachments/files/18917411/Game.Design.Document.docx)
+
+---
+
+
 
