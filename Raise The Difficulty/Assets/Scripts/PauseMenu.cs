@@ -9,14 +9,18 @@ using System.Threading.Tasks;
 
 public class PauseMenu : MonoBehaviour
 {
+    #region Bools
     public bool GameIsPaused = false; //bool to tell if game is paused
-    public bool UpgradeActive = false; 
+    public bool UpgradeActive = false;
+    #endregion
 
+    #region Anims/Reference
     public GameObject pauseMenuUI; //game object for UI
     [SerializeField] RectTransform pausePanelRect, staminaBar, hitTracker, timerRect;
     [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] float topPosY, middlePosY;
     [SerializeField] float tweenDur;
+    #endregion
 
     private void Update()
     {
@@ -65,9 +69,9 @@ public class PauseMenu : MonoBehaviour
 
     void PauseIntro()
     {
-        canvasGroup.DOFade(1, tweenDur).SetUpdate(true);
-        pausePanelRect.DOAnchorPosY(middlePosY, tweenDur).SetUpdate(true);
-        staminaBar.DOAnchorPosX(-530, tweenDur).SetUpdate(true);
+        canvasGroup.DOFade(1, tweenDur).SetUpdate(true); //Fades the background in
+        pausePanelRect.DOAnchorPosY(middlePosY, tweenDur).SetUpdate(true); //Moves the panel to the middle of screen
+        staminaBar.DOAnchorPosX(-530, tweenDur).SetUpdate(true); //Moves each UI element away by respective axis
         hitTracker.DOAnchorPosY(93, tweenDur).SetUpdate(true);
         timerRect.DOAnchorPosX(297, tweenDur).SetUpdate(true);
     }

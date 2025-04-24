@@ -6,6 +6,7 @@ using Cinemachine;
 
 public class PlayerHit : MonoBehaviour
 {
+    #region References
     Animator animator;
     public int hitCount = 0;
     public int maxHitsAllowed;
@@ -13,11 +14,13 @@ public class PlayerHit : MonoBehaviour
     public PerformanceWaves waves;
     public Color normalColor = Color.white;
     public Color dangerColor = Color.red;
+    #endregion
 
+    #region Audio/Cinemachine
     [SerializeField] AudioClip hitAudio;
     private AudioSource audioSource;
-
     [SerializeField] private CinemachineImpulseSource impulseSource;
+    #endregion
 
     private void Start()
     {
