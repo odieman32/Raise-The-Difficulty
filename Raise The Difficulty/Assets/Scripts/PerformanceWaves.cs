@@ -67,9 +67,15 @@ public class PerformanceWaves : MonoBehaviour
     private BossEnemy currentBoss;
     #endregion
 
+    #region Audio
+    private AudioSource audioSource;
+    [SerializeField] AudioClip difUp;
+    [SerializeField] AudioClip difDown;
+    #endregion
 
     private void Start()
     {
+        audioSource = GetComponentInParent<AudioSource>();
         InitializeWaves();
         bossBar.SetActive(false);
         StartWave();
@@ -294,6 +300,7 @@ public class PerformanceWaves : MonoBehaviour
         upgradeInProgress = true;
         failInProgress = false;
         ShowDifficulty("Difficulty Raised");
+        GetComponentInParent<AudioSource>().PlayOneShot(difUp);
         yield return new WaitForSeconds(2f);
         ShowUpgradePanel();
         upgradeInProgress = false;
@@ -305,6 +312,7 @@ public class PerformanceWaves : MonoBehaviour
         failInProgress = true;
         waveInProgress = false;
         ShowDifficulty("Difficulty Lowered");
+        GetComponentInParent<AudioSource>().PlayOneShot(difDown);
         yield return new WaitForSeconds(2f);
         if (!string.IsNullOrEmpty(lastUpgradeType))
         {

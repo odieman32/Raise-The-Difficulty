@@ -249,6 +249,7 @@ MonoBehaviour:
   moveSpeed: 0.3
   health: 20
   hitSound: {fileID: 8300000, guid: 2b21ef916f6943c439b71a7c74568878, type: 3}
+  attackSound: {fileID: 8300000, guid: c91fcf414acc0344cb03b13996f1bf3b, type: 3}
   projectilePrefab: {fileID: 1257435662549938831, guid: bcab6730bf167654397ca2c633e85fe9, type: 3}
   firePoint: {fileID: 4942558543323638962}
   projectileSpeed: 7.5

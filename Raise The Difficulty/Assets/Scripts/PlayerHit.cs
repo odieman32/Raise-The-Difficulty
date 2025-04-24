@@ -14,11 +14,15 @@ public class PlayerHit : MonoBehaviour
     public Color normalColor = Color.white;
     public Color dangerColor = Color.red;
 
+    [SerializeField] AudioClip hitAudio;
+    private AudioSource audioSource;
+
     [SerializeField] private CinemachineImpulseSource impulseSource;
 
     private void Start()
     {
         animator = GetComponentInParent<Animator>();
+        audioSource = GetComponentInParent<AudioSource>();
         UpdateHitsUI();
     }
 
@@ -29,7 +33,7 @@ public class PlayerHit : MonoBehaviour
         UpdateHitsUI();
 
         animator.SetTrigger("isHit");
-
+        GetComponentInParent<AudioSource>().PlayOneShot(hitAudio);
 
 
         if (impulseSource != null )

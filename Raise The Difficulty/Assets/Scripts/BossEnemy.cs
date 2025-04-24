@@ -21,6 +21,7 @@ public class BossEnemy : MonoBehaviour
 
     #region Audio
     [SerializeField] AudioClip hitSound;
+    [SerializeField] AudioClip attackSound;
     private AudioSource audioSource;
     #endregion
 
@@ -203,6 +204,7 @@ public class BossEnemy : MonoBehaviour
         shootTimer = shootCooldown;
 
         animator.SetTrigger("Shoot");
+        GetComponent<AudioSource>().PlayOneShot(attackSound);
 
         StartCoroutine(ShootAfterDelay(.3f));
     }
