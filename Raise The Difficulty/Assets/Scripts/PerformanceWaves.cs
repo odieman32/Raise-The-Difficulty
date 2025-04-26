@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using System.Xml.Serialization;
 
 public class PerformanceWaves : MonoBehaviour
 {
